@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cbyf7348b2rkf"]
+
+[ext_resource type="Script" uid="uid://day0pvr8c0uw6" path="res://Scripts/Maps_Scripts/_base_scene.gd" id="1_e4yc5"]
+[ext_resource type="Texture2D" uid="uid://cy5mpp8rx160" path="res://CollisionMaps/CollisionMap1.png" id="2_g3i0o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ojlq4"]
+texture = ExtResource("2_g3i0o")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 0.35971832, -0.17985725, -8, 8)
+2:0/0/terrains_peering_bit/bottom_right_corner = 0
+2:0/0/terrains_peering_bit/left_side = 0
+2:0/0/terrains_peering_bit/top_left_corner = 0
+2:0/0/terrains_peering_bit/top_right_corner = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/terrains_peering_bit/right_side = 0
+4:0/0/terrains_peering_bit/bottom_right_corner = 0
+4:0/0/terrains_peering_bit/bottom_side = 0
+4:0/0/terrains_peering_bit/bottom_left_corner = 0
+4:0/0/terrains_peering_bit/left_side = 0
+4:0/0/terrains_peering_bit/top_left_corner = 0
+4:0/0/terrains_peering_bit/top_side = 0
+4:0/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSet" id="TileSet_figuv"]
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "walls"
+terrain_set_0/terrain_0/color = Color(0.56987953, 0.0016843837, 0.762206, 1)
+sources/0 = SubResource("TileSetAtlasSource_ojlq4")
+
+[node name="MapTexture" type="Node2D" unique_id=1652564462]
+script = ExtResource("1_e4yc5")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=609675861]
+layer = -1
+
+[node name="MapTexture" type="TextureRect" parent="Background" unique_id=1535307837]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionLimits" type="TileMapLayer" parent="Background" unique_id=346702876]
+modulate = Color(1, 1, 1, 0.3529412)
+tile_set = SubResource("TileSet_figuv")

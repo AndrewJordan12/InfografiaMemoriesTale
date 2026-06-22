@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dubvvkfets0lg"]
+
+[ext_resource type="Script" uid="uid://djm0uhw7n7ttl" path="res://Scenes/Loading/loading.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bfwqovgg4cul6" path="res://Scenes/Loading/01.png" id="2_f01"]
+[ext_resource type="Texture2D" uid="uid://om1n3rarglab" path="res://Scenes/Loading/02.png" id="3_f02"]
+[ext_resource type="Texture2D" uid="uid://cosku1xb7ntmp" path="res://Scenes/Loading/03.png" id="4_f03"]
+[ext_resource type="Texture2D" uid="uid://ckvl0caa4avg1" path="res://Scenes/Loading/04.png" id="5_f04"]
+[ext_resource type="Texture2D" uid="uid://dt2s0jsyrjx7e" path="res://Scenes/Loading/05.png" id="6_f05"]
+[ext_resource type="Texture2D" uid="uid://sic2i068rcwf" path="res://Scenes/Loading/06.png" id="7_f06"]
+[ext_resource type="Texture2D" uid="uid://54qbty00e1ey" path="res://Scenes/Loading/07.png" id="8_f07"]
+[ext_resource type="Texture2D" uid="uid://cxx2nt0tss8xd" path="res://Scenes/Loading/08.png" id="9_f08"]
+[ext_resource type="Texture2D" uid="uid://6gtn04komcym" path="res://Scenes/Loading/09.png" id="10_f09"]
+[ext_resource type="Texture2D" uid="uid://dm3yvp0v1fjkh" path="res://Scenes/Loading/10.png" id="11_f10"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_loading"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_f03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_f07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_f08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_f09")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f10")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Loading" type="Control" unique_id=420053239]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=232809379]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=635353422]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="GlitchOverlay" type="ColorRect" parent="." unique_id=28957739]
+layout_mode = 0
+offset_top = 200.0
+offset_right = 400.0
+offset_bottom = 205.0
+color = Color(0, 1, 0.3, 0.08)
+
+[node name="Scanlines" type="ColorRect" parent="." unique_id=1464144531]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.03)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=359807558]
+position = Vector2(1075.0001, 529)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_loading")
+autoplay = "default"
+
+[node name="LoadingLabel" type="Label" parent="." unique_id=1414993880]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -60.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Cargando..."
+horizontal_alignment = 2
+vertical_alignment = 2

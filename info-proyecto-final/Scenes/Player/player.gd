@@ -18,6 +18,7 @@ func _ready() -> void:
 	_bubble_label.visible = false
 	_bubble_label.add_theme_font_size_override("font_size", 42)
 	add_child(_bubble_label)
+	load_scene_scaling_settings()
 
 @onready var parent_node = get_parent()
 @onready var sprite : Sprite2D = get_node("Sprite2D")
@@ -30,9 +31,6 @@ var floor_bottom_limit : int
 var floor_size : float
 var min_scale : float
 var max_scale : float
-
-func _ready() -> void:
-	load_scene_scaling_settings()
 
 func _physics_process(delta: float) -> void:
 	move_character(delta)

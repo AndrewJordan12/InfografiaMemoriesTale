@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="1_7hlxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hlxd"]
-size = Vector2(154, 140)
+size = Vector2(132, 180.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs3yv"]
 size = Vector2(85, 73)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgeqm2kpyx4xk"
-path="res://.godot/imported/IMG-20260621-WA0001.jpg-0f62ac35ee6b51e7e98205c1560e5f53.ctex"
+uid="uid://ccykgjnuybbxq"
+path="res://.godot/imported/11_PondBench.png-fa64940483cd2b97eb110c8898c48cf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/IMG-20260621-WA0001.jpg"
-dest_files=["res://.godot/imported/IMG-20260621-WA0001.jpg-0f62ac35ee6b51e7e98205c1560e5f53.ctex"]
+source_file="res://Assets/Maps/11_PondBench.png"
+dest_files=["res://.godot/imported/11_PondBench.png-fa64940483cd2b97eb110c8898c48cf9.ctex"]
 
 [params]
 

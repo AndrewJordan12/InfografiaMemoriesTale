@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do48k2fbkdxbf"
-path="res://.godot/imported/11_PondBench.jpg-615cb21cb8484580c32653c6cdba8afd.ctex"
+uid="uid://be70mng57e80e"
+path="res://.godot/imported/8_BridgeMiddle.png-57819caa14703ffd4ec47ea35a16caaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/11_PondBench.jpg"
-dest_files=["res://.godot/imported/11_PondBench.jpg-615cb21cb8484580c32653c6cdba8afd.ctex"]
+source_file="res://Assets/Maps/8_BridgeMiddle.png"
+dest_files=["res://.godot/imported/8_BridgeMiddle.png-57819caa14703ffd4ec47ea35a16caaa.ctex"]
 
 [params]
 

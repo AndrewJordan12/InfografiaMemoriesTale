@@ -22,6 +22,8 @@ State="*uid://csu0de4q6mo4n"
 
 [display]
 
+window/size/viewport_width=1181
+window/size/viewport_height=844
 window/stretch/mode="canvas_items"
 
 [input]

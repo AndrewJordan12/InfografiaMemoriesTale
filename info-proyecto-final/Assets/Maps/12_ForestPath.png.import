@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5ogodjidu50m"
-path="res://.godot/imported/13_MusicMan.jpg-a261db5373d596dcef01de4a4e7580a8.ctex"
+uid="uid://c3an686jxp68s"
+path="res://.godot/imported/12_ForestPath.png-d297363ef7d7e1fe4a0df993c2673274.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/13_MusicMan.jpg"
-dest_files=["res://.godot/imported/13_MusicMan.jpg-a261db5373d596dcef01de4a4e7580a8.ctex"]
+source_file="res://Assets/Maps/12_ForestPath.png"
+dest_files=["res://.godot/imported/12_ForestPath.png-d297363ef7d7e1fe4a0df993c2673274.ctex"]
 
 [params]
 

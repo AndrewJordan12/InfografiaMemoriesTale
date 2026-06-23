@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cppumdp2umioj"
-path="res://.godot/imported/14_IceCreamVendor.jpg-4408d900e114408e6fc321378440ad47.ctex"
+uid="uid://b5jpuekn4v4y"
+path="res://.godot/imported/1_Entrance.png-b5f531b78e1fc3a133518e4f1309afe7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/14_IceCreamVendor.jpg"
-dest_files=["res://.godot/imported/14_IceCreamVendor.jpg-4408d900e114408e6fc321378440ad47.ctex"]
+source_file="res://Assets/Maps/1_Entrance.png"
+dest_files=["res://.godot/imported/1_Entrance.png-b5f531b78e1fc3a133518e4f1309afe7.ctex"]
 
 [params]
 

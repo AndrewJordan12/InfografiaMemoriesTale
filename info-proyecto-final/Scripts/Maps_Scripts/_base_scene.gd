@@ -1,11 +1,25 @@
 extends Node2D
+class_name BaseMap
 
+@onready var main = get_node("/root/State")
+@export var receiver_id := ""
 
-# Called when the node enters the scene tree for the first time.
+var digit := -1
+
 func _ready() -> void:
 	print("Current scene:",name)
+	digit = main.get_digit(receiver_id)
+	if digit != -1:
+		assign_digit(digit)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+
+func assign_digit(value: int):
+	digit = value
+	print(str(digit))
+	on_digit_received()
+
+func on_digit_received():
+	pass
+	

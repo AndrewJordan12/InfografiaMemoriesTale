@@ -12,6 +12,7 @@ size = Vector2(639, 13)
 size = Vector2(27, 321)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_qugsi")]
+receiver_id = "12"
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_rb3sc")

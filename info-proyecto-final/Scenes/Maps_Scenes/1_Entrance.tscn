@@ -17,6 +17,7 @@ size = Vector2(1104, 19)
 
 [node name="TextureRect" unique_id=518045972 instance=ExtResource("1_mmhnc")]
 script = ExtResource("5_escn")
+receiver_id = "1"
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_qulb2")

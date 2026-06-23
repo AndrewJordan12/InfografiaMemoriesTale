@@ -16,6 +16,7 @@ size = Vector2(560, 43)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_cgvwi")]
 receiver_id = "14"
+floor_upper_limit = 430
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_muhvj")

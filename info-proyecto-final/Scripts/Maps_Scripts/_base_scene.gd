@@ -3,6 +3,12 @@ class_name BaseMap
 
 @onready var main = get_node("/root/State")
 @export var receiver_id := ""
+#Variables for making the character sprite scale up or down according to vertical movement
+@export var character_scaling_ratio : float = 1
+@export var floor_bottom_limit : int = 650
+@export var floor_upper_limit : int
+@export var min_scale: float = 0.5
+@export var max_scale: float = 1.5
 
 var digit := -1
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d3it5qqw415ra"]
 
 [ext_resource type="Shader" uid="uid://cn52a15unsem5" path="res://Shaders/key.gdshader" id="1_avyew"]
+[ext_resource type="Script" uid="uid://b0mbkgrh86ikq" path="res://Scripts/UI/key.gd" id="1_qj0db"]
 [ext_resource type="LabelSettings" uid="uid://bqr03o17go4ae" path="res://Theme/Keys.tres" id="2_o46p0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o46p0"]
@@ -21,17 +22,20 @@ shader_parameter/smooth_edges = false
 custom_minimum_size = Vector2(105, 95)
 offset_right = 8.0
 offset_bottom = 8.0
+script = ExtResource("1_qj0db")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1028183771]
 custom_minimum_size = Vector2(105, 95)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=1473738146]
 material = SubResource("ShaderMaterial_o46p0")
 custom_minimum_size = Vector2(95, 95)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PanelContainer" unique_id=1218224087]
 layout_mode = 2
@@ -41,3 +45,7 @@ label_settings = ExtResource("2_o46p0")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

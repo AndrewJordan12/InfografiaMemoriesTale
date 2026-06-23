@@ -29,7 +29,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 theme = SubResource("Theme_k3esd")
 script = ExtResource("1_tsxvi")
 
@@ -86,31 +85,38 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
 size_flags_stretch_ratio = 20.0
+mouse_filter = 2
 columns = 3
 
 [node name="Key1" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=2090516326 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "1"
+key_value = "1"
 
 [node name="Key2" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1070824588 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "2"
+key_value = "2"
 
 [node name="Key3" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1583942461 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "3"
+key_value = "3"
 
 [node name="Key4" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=663122467 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "4"
+key_value = "4"
 
 [node name="Key5" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=916789343 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "5"
+key_value = "5"
 
 [node name="Key6" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=654757309 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "6"
+key_value = "6"
 
 [node name="Key7" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1485085154 instance=ExtResource("3_pmtet")]
 layout_mode = 2
@@ -119,22 +125,27 @@ text = "7"
 [node name="Key8" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=835088561 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "8"
+key_value = "8"
 
 [node name="Key9" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1111114040 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "9"
+key_value = "9"
 
 [node name="Key0" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=296141085 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "0"
+key_value = "0"
 
-[node name="KeyS1" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=2038749212 instance=ExtResource("3_pmtet")]
+[node name="Key#" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=2038749212 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "#"
+key_value = "#"
 
-[node name="KeyS2" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1422031284 instance=ExtResource("3_pmtet")]
+[node name="Key*" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1422031284 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 text = "*"
+key_value = "*"
 
 [node name="KeyContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=298402869]
 layout_direction = 1
@@ -146,11 +157,24 @@ size_flags_stretch_ratio = 20.0
 [node name="DEL" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=161442878 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 size_flags_vertical = 2
+mouse_filter = 1
+key_value = "DEL"
+is_num = false
 
 [node name="CLEAR" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=2006102907 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 size_flags_vertical = 2
+mouse_filter = 1
+key_value = "CLEAR"
+is_num = false
 
 [node name="ENTER" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=1567428892 instance=ExtResource("3_pmtet")]
 layout_mode = 2
 size_flags_vertical = 10
+mouse_filter = 1
+key_value = "ENTER"
+is_num = false
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/DEL" to="." method="_on_del_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/CLEAR" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/ENTER" to="." method="_on_enter_pressed"]

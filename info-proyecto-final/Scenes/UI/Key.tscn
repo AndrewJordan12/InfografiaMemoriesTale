@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://d3it5qqw415ra"]
+
+[ext_resource type="Shader" uid="uid://cn52a15unsem5" path="res://Shaders/key.gdshader" id="1_avyew"]
+[ext_resource type="LabelSettings" uid="uid://bqr03o17go4ae" path="res://Theme/Keys.tres" id="2_o46p0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o46p0"]
+shader = ExtResource("1_avyew")
+shader_parameter/key_color = Color(0.09302122, 0.2083019, 0.27566493, 1)
+shader_parameter/key_hover_color = Color(0.35, 0.45, 0.55, 1)
+shader_parameter/key_press_color = Color(0.20392157, 0.80784315, 0.7921569, 1)
+shader_parameter/corner_radius = 0.162000007695
+shader_parameter/shadow_intensity = 0.00400000019
+shader_parameter/is_pressed = false
+shader_parameter/is_hovered = false
+shader_parameter/is_active = false
+shader_parameter/press_animation = 0.0
+shader_parameter/glow_intensity = 0.0
+shader_parameter/smooth_edges = false
+
+[node name="Key" type="Button" unique_id=1583942461]
+custom_minimum_size = Vector2(105, 95)
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1028183771]
+custom_minimum_size = Vector2(105, 95)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=1473738146]
+material = SubResource("ShaderMaterial_o46p0")
+custom_minimum_size = Vector2(95, 95)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1218224087]
+layout_mode = 2
+size_flags_vertical = 1
+text = "0"
+label_settings = ExtResource("2_o46p0")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

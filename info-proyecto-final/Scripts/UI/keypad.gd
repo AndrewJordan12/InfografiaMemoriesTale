@@ -3,15 +3,11 @@ class_name NumberKeypad
 
 # signals
 signal code_entered(code: String)
-signal code_changed(code: String)
-signal digit_added(digit: String)
-signal digit_removed()
-signal code_cleared()
 
 @export var num_digits: int = 5
 @export var auto_submit_on_max: bool = true
-@export var hide_entered_digits: bool = false  # Show as asterisks like a PIN pad
-@export var hide_delay: float = 0.5  # How long to show digit before hiding
+@export var hide_entered_digits: bool = false 
+@export var hide_delay: float = 0.5  
 
 @onready var display_label: Label = $PanelContainer/VBoxContainer/PanelContainer/AScreen
 @onready var grid_container: GridContainer = $PanelContainer/VBoxContainer/HBoxContainer/KeyContainer 
@@ -29,22 +25,22 @@ func _ready():
 
 func setup_buttons():
 	clear_button.pressed.connect(_on_clear_pressed)
-	var clearLabel = clear_button.get_child(1).get_child(2)
+	var clearLabel = clear_button.get_child(0).get_child(1)
 	if clearLabel:
-		clearLabel.Text = "CLEAR"
+		clearLabel.text = "CLEAR"
 	del_button.pressed.connect(_on_del_pressed)
-	var del_buttonLabel = clear_button.get_child(1).get_child(2)
+	var del_buttonLabel = del_button.get_child(0).get_child(1)
 	if del_buttonLabel:
-		del_buttonLabel.Text = "DEL"
+		del_buttonLabel.text = "DEL"
 	enter_button.pressed.connect(_on_enter_pressed)
-	var enter_buttonLabel = clear_button.get_child(1).get_child(2)
+	var enter_buttonLabel = enter_button.get_child(0).get_child(1)
 	if enter_buttonLabel:
-		enter_buttonLabel.Text = "ENTER"
+		enter_buttonLabel.text = "ENTER"
 	for key in grid_container.get_children():
 		key.pressed.connect(_on_number_button_pressed.bind(key))
-		var label = key.get_child(1).get_child(2)
+		var label = key.get_child(0).get_child(1)
 		if label:
-			label.Text = key.name
+			label.text = (key.name).right(1)
 
 func setup_timer():
 	digit_timer = Timer.new()
@@ -118,7 +114,7 @@ func update_display():
 	
 	if display_text.is_empty():
 		for i in range(num_digits):
-			display_text += "_"
+			display_text += " _ "
 	display_label.text = display_text
 
 func _on_hide_digit_timeout():

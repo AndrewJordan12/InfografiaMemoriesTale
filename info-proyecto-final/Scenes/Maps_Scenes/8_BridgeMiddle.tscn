@@ -6,13 +6,13 @@
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftBustTrigger"]
-size = Vector2(25, 151)
+size = Vector2(17, 303)
 
 [sub_resource type="RectangleShape2D" id="ShapeTopLampTrigger"]
-size = Vector2(9, 62)
+size = Vector2(16.5, 120)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottomBridgeTrigger"]
-size = Vector2(16, 77)
+size = Vector2(17, 184)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_g3rct")]
 
@@ -25,41 +25,29 @@ tile_map_data = PackedByteArray("AABIACkAAAAAAAAAAABIACgAAAAAAAAAAABIACcAAAAAAAA
 [node name="Player" parent="." index="1" unique_id=617508982 instance=ExtResource("3_plyr")]
 position = Vector2(558, 309)
 
-[node name="LeftBustTrigger" type="Area2D" parent="." index="2" unique_id=1480204777]
-position = Vector2(29, 394)
-script = ExtResource("4_trig")
-target_scene = "res://Scenes/Maps_Scenes/4_Bust.tscn"
-spawn_point = "right"
-trigger_color = Color(1, 0, 0, 0.3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBustTrigger" index="0" unique_id=1681495423]
-position = Vector2(-16.5, 3.5)
-shape = SubResource("ShapeLeftBustTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="LeftBustTrigger" index="1" unique_id=2070045485]
-
-[node name="TopLampTrigger" type="Area2D" parent="." index="3" unique_id=848245644]
-position = Vector2(1125, 336)
-script = ExtResource("4_trig")
-target_scene = "res://Scenes/Maps_Scenes/3_OneLampTwoBenches.tscn"
-spawn_point = "bottom"
-trigger_color = Color(0.5, 0, 1, 0.3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopLampTrigger" index="0" unique_id=1767338265]
-position = Vector2(21.5, 6)
-shape = SubResource("ShapeTopLampTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="TopLampTrigger" index="1" unique_id=1016745579]
-
-[node name="BottomBridgeTrigger" type="Area2D" parent="." index="4" unique_id=1987517142]
-position = Vector2(1130, 429)
+[node name="LeftTrigger" type="Area2D" parent="." index="2" unique_id=1480204777]
+position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/9_BridgeBottom.tscn"
-spawn_point = "top"
-trigger_color = Color(0, 1, 0, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBridgeTrigger" index="0" unique_id=1440546133]
-position = Vector2(17, -13.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=1681495423]
+position = Vector2(9, 147.5)
+shape = SubResource("ShapeLeftBustTrigger")
+
+[node name="RightTopTrigger" type="Area2D" parent="." index="3" unique_id=848245644]
+position = Vector2(1152, 200)
+script = ExtResource("4_trig")
+target_scene = "res://Scenes/Maps_Scenes/4_Bust.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTopTrigger" index="0" unique_id=1767338265]
+position = Vector2(-8.25, 180)
+shape = SubResource("ShapeTopLampTrigger")
+
+[node name="RightBottomTrigger" type="Area2D" parent="." index="4" unique_id=1987517142]
+position = Vector2(1152, 450)
+script = ExtResource("4_trig")
+target_scene = "res://Scenes/Maps_Scenes/3_OneLampTwoBenches.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBottomTrigger" index="0" unique_id=1440546133]
+position = Vector2(-8, 82)
 shape = SubResource("ShapeBottomBridgeTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="BottomBridgeTrigger" index="1" unique_id=1193886424]

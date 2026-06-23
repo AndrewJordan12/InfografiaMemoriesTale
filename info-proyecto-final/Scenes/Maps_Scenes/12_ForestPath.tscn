@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftStatueTrigger"]
-size = Vector2(639, 13)
+size = Vector2(644.5, 10)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightIceTrigger"]
-size = Vector2(27, 321)
+size = Vector2(9, 336)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_qugsi")]
 
@@ -22,28 +22,20 @@ tile_map_data = PackedByteArray("AAAeACAAAAAAAAAAAAAeAB8AAAAAAAAAAAAdACAAAAAAAAA
 [node name="Player" parent="." index="1" unique_id=222452292 instance=ExtResource("3_plyr")]
 position = Vector2(839, 534)
 
-[node name="LeftStatueTrigger" type="Area2D" parent="." index="2" unique_id=493957601]
-position = Vector2(26, 591)
+[node name="LeftTrigger" type="Area2D" parent="." index="2" unique_id=493957601]
+position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/10_Statue.tscn"
-spawn_point = "right"
-trigger_color = Color(0, 0, 1, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftStatueTrigger" index="0" unique_id=2009766882]
-position = Vector2(294.5, 44.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=2009766882]
+position = Vector2(322.75, 311)
 shape = SubResource("ShapeLeftStatueTrigger")
 
-[node name="Polygon2D" type="Polygon2D" parent="LeftStatueTrigger" index="1" unique_id=5471631]
-
-[node name="RightIceTrigger" type="Area2D" parent="." index="3" unique_id=1532973921]
-position = Vector2(1124, 575)
+[node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=1532973921]
+position = Vector2(1152, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
-spawn_point = "left"
-trigger_color = Color(1, 0, 0, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightIceTrigger" index="0" unique_id=1703998261]
-position = Vector2(11.5, -97.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1703998261]
+position = Vector2(-4.5, 148)
 shape = SubResource("ShapeRightIceTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="RightIceTrigger" index="1" unique_id=1226583684]

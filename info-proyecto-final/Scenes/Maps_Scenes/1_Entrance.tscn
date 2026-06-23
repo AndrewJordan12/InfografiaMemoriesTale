@@ -7,13 +7,13 @@
 [ext_resource type="Script" uid="uid://bnialaf8ajx6a" path="res://Scripts/Maps_Scripts/entrance_scene.gd" id="5_escn"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeft"]
-size = Vector2(17, 140)
+size = Vector2(8.5, 136)
 
 [sub_resource type="RectangleShape2D" id="ShapeRight"]
-size = Vector2(28, 182)
+size = Vector2(8.5, 183)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottom"]
-size = Vector2(1104, 19)
+size = Vector2(1152, 8.5)
 
 [node name="TextureRect" unique_id=518045972 instance=ExtResource("1_mmhnc")]
 script = ExtResource("5_escn")
@@ -28,40 +28,28 @@ tile_map_data = PackedByteArray("AAAbAB8AAAAAAAAAAAAbAB4AAAAAAAAAAAAbAB0AAAAAAAA
 position = Vector2(575.1388, 535.2501)
 
 [node name="LeftTrigger" type="Area2D" parent="." index="2" unique_id=2140242733]
-position = Vector2(30, 540)
+position = Vector2(7, 576)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/3_OneLampTwoBenches.tscn"
-spawn_point = "right"
-trigger_color = Color(1, 0, 0, 0.3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=444485126]
-position = Vector2(-19.5, 39)
+position = Vector2(-2.75, 4)
 shape = SubResource("ShapeLeft")
 
-[node name="Polygon2D" type="Polygon2D" parent="LeftTrigger" index="1" unique_id=2097733816]
-
 [node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=2111396686]
-position = Vector2(1887, 537)
+position = Vector2(1145, 545)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
-spawn_point = "left"
-trigger_color = Color(0, 0, 1, 0.3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1965848980]
-position = Vector2(-749, 17)
+position = Vector2(2.75, 11)
 shape = SubResource("ShapeRight")
 
-[node name="Polygon2D" type="Polygon2D" parent="RightTrigger" index="1" unique_id=238802904]
-
 [node name="BottomTrigger" type="Area2D" parent="." index="4" unique_id=883470205]
-position = Vector2(958, 1114)
+position = Vector2(580, 644)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/13_MusicMan.tscn"
-spawn_point = "top"
-trigger_color = Color(0, 1, 0, 0.3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger" index="0" unique_id=2019271709]
-position = Vector2(-387, -473.5)
+position = Vector2(-4, -0.25)
 shape = SubResource("ShapeBottom")
-
-[node name="Polygon2D" type="Polygon2D" parent="BottomTrigger" index="1" unique_id=520680086]

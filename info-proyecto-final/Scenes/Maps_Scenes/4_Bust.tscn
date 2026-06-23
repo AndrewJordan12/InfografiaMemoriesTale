@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 
 [sub_resource type="RectangleShape2D" id="ShapeRight"]
-size = Vector2(374, 47)
+size = Vector2(368.5, 6)
 
 [sub_resource type="RectangleShape2D" id="ShapeTopLampTrigger"]
-size = Vector2(365, 32)
+size = Vector2(369, 6)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_yw3hl")]
 
@@ -22,28 +22,20 @@ tile_map_data = PackedByteArray("AABIABIAAAAAAAAAAABIABEAAAAAAAAAAABIABAAAAAAAAA
 [node name="Player" parent="." index="1" unique_id=1660232710 instance=ExtResource("3_plyr")]
 position = Vector2(297, 469)
 
-[node name="RightTrigger" type="Area2D" parent="." index="2" unique_id=610381349]
-position = Vector2(1890, 540)
+[node name="BottomLeftTrigger" type="Area2D" parent="." index="2" unique_id=610381349]
+position = Vector2(0, 648)
 script = ExtResource("4_trig")
-target_scene = "res://Scenes/Maps_Scenes/1_Entrance.tscn"
-spawn_point = "left"
-trigger_color = Color(0, 0, 1, 0.3)
+target_scene = "res://Scenes/Maps_Scenes/8_BridgeMiddle.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=2102426730]
-position = Vector2(-1701, 82.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomLeftTrigger" index="0" unique_id=2102426730]
+position = Vector2(184.75, -3)
 shape = SubResource("ShapeRight")
 
-[node name="Polygon2D" type="Polygon2D" parent="RightTrigger" index="1" unique_id=512647986]
-
-[node name="TopLampTrigger" type="Area2D" parent="." index="3" unique_id=1966037121]
-position = Vector2(960, 30)
+[node name="TopRightTrigger" type="Area2D" parent="." index="3" unique_id=1966037121]
+position = Vector2(843, 653)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/3_OneLampTwoBenches.tscn"
-spawn_point = "bottom"
-trigger_color = Color(0.5, 0, 1, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopLampTrigger" index="0" unique_id=781230687]
-position = Vector2(8.5, 601)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopRightTrigger" index="0" unique_id=781230687]
+position = Vector2(124.5, -8)
 shape = SubResource("ShapeTopLampTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="TopLampTrigger" index="1" unique_id=506697908]

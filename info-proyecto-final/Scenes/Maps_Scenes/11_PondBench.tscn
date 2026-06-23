@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 
 [sub_resource type="RectangleShape2D" id="ShapeRightBridgeTrigger"]
-size = Vector2(18, 182)
+size = Vector2(4, 120)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottomMusicTrigger"]
-size = Vector2(22, 121)
+size = Vector2(7, 168)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_ceya6")]
 
@@ -22,28 +22,20 @@ tile_map_data = PackedByteArray("AABEABkAAAAAAAAAAABEABgAAAAAAAAAAABEABcAAAAAAAA
 [node name="Player" parent="." index="1" unique_id=401052411 instance=ExtResource("3_plyr")]
 position = Vector2(397.00006, 521)
 
-[node name="RightBridgeTrigger" type="Area2D" parent="." index="2" unique_id=529996625]
-position = Vector2(1127, 490)
+[node name="LeftTrigger" type="Area2D" parent="." index="2" unique_id=529996625]
+position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/9_BridgeBottom.tscn"
-spawn_point = "left"
-trigger_color = Color(1, 0, 0, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBridgeTrigger" index="0" unique_id=457052929]
-position = Vector2(16, 66)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=457052929]
+position = Vector2(2, 256)
 shape = SubResource("ShapeRightBridgeTrigger")
 
-[node name="Polygon2D" type="Polygon2D" parent="RightBridgeTrigger" index="1" unique_id=1667465869]
-
-[node name="BottomMusicTrigger" type="Area2D" parent="." index="3" unique_id=1440491296]
-position = Vector2(24, 623)
+[node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=1440491296]
+position = Vector2(1152, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/13_MusicMan.tscn"
-spawn_point = "top"
-trigger_color = Color(0, 1, 0, 0.3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomMusicTrigger" index="0" unique_id=1322891733]
-position = Vector2(-14, -35.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1322891733]
+position = Vector2(-3.5, 232)
 shape = SubResource("ShapeBottomMusicTrigger")
-
-[node name="Polygon2D" type="Polygon2D" parent="BottomMusicTrigger" index="1" unique_id=2032328757]

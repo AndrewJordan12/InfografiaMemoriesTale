@@ -24,7 +24,7 @@ func init_ui():
 	get_tree().root.add_child.call_deferred(ui_layer)
 	keypad_instance = keypad_scene.instantiate()
 	ui_layer.add_child.call_deferred(keypad_instance)
-	ui_layer.hide()
+	keypad_instance.visible = false
 
 func generate_puzzle():
 	secret_code.clear()
@@ -60,7 +60,7 @@ func validate_code(code:String) -> bool:
 	return false
 	
 func show_keypad():
-	ui_layer.show()
+	keypad_instance.visible = true
 	
 func hide_keypad():
-	ui_layer.hide()
+	keypad_instance.visible = false

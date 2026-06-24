@@ -7,12 +7,24 @@ var available_ids = [
 ]
 
 var assigned_ids := {}
-
 var code_length := 4
 var secret_code: Array[int] = []
 
+var keypad_scene = preload("res://Scenes/UI/Keypad.tscn")
+var keypad_instance 
+var ui_layer:CanvasLayer
+
 func _ready():
 	generate_puzzle()
+	init_ui()
+
+func init_ui():
+	ui_layer = CanvasLayer.new()
+	ui_layer.layer = 100
+	get_tree().root.add_child.call_deferred(ui_layer)
+	keypad_instance = keypad_scene.instantiate()
+	ui_layer.add_child.call_deferred(keypad_instance)
+	ui_layer.hide()
 
 func generate_puzzle():
 	secret_code.clear()
@@ -33,3 +45,22 @@ func generate_puzzle():
 	
 func get_digit(receiver_id: String) -> int:
 	return assigned_ids.get(receiver_id, -1)
+	
+func get_code_lenght() -> int:
+	return code_length
+	
+func validate_code(code:String) -> bool:
+	if code.length() != code_length:
+		return false
+	var scode = "" 
+	for digit in secret_code:
+		scode += str(digit)
+	if code == scode:
+		return true
+	return false
+	
+func show_keypad():
+	ui_layer.show()
+	
+func hide_keypad():
+	ui_layer.hide()

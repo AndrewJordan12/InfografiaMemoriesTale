@@ -2,7 +2,8 @@
 
 [resource]
 font_size = 30
-font_color = Color(0.62499493, 0.41854048, 0.90040225, 1)
+font_color = Color(0, 0, 0, 1)
 outline_size = 10
+outline_color = Color(0.43460768, 0.46727878, 0.36453396, 1)
 shadow_size = 3
 shadow_color = Color(0.6745098, 0, 0, 0)

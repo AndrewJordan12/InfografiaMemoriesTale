@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cetybvnllhd3b" path="res://Scenes/Player/player.gd" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://6s0ydhyk17yu" path="res://Assets/Freddy-Fazbear.png" id="1_uvnfx"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtuoh"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xpcdj"]
 radius = 20.000015
 height = 182.85713
@@ -12,6 +14,7 @@ scale = Vector2(0.35, 0.35)
 script = ExtResource("1_a3d8c")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1659308043]
+material = SubResource("ShaderMaterial_mtuoh")
 texture = ExtResource("1_uvnfx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=675312511]

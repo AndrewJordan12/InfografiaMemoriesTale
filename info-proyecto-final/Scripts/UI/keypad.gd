@@ -73,7 +73,11 @@ func submit_code():
 	print("Code entered: ", current_code)
 	var sucess = state.validate_code(current_code)
 	print(sucess)
-	clear_code()
+	if sucess:
+		_on_exit_pressed()
+	else:
+		clear_code()
+	
 
 func update_display():
 	if not display_label:

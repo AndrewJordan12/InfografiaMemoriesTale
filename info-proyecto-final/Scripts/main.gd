@@ -9,6 +9,8 @@ var available_ids = [
 var assigned_ids := {}
 var code_length := 4
 var secret_code: Array[int] = []
+var max_retries: int = 3
+var retries : int = 0
 
 var keypad_scene = preload("res://Scenes/UI/Keypad.tscn")
 var keypad_instance 
@@ -52,11 +54,16 @@ func get_code_lenght() -> int:
 func validate_code(code:String) -> bool:
 	if code.length() != code_length:
 		return false
+	retries += 1
+	
 	var scode = "" 
 	for digit in secret_code:
 		scode += str(digit)
 	if code == scode:
+		on_won()
 		return true
+	if retries >= max_retries:
+		on_failed()
 	return false
 	
 func show_keypad():
@@ -64,3 +71,9 @@ func show_keypad():
 	
 func hide_keypad():
 	keypad_instance.visible = false
+
+func on_failed():
+	print("Failed")
+	
+func on_won():
+	print("WON")

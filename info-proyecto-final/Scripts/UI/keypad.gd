@@ -1,13 +1,12 @@
 extends Control
 class_name NumberKeypad
-# signals
-signal code_entered(code: String)
 
-@export var num_digits: int = 5
+@export var num_digits: int = 4
 @export var auto_submit_on_max: bool = false
 @export var hide_entered_digits: bool = false 
 @export var hide_delay: float = 0.5  
 
+@onready var state = get_node("/root/State")
 @onready var display_label: Label = $PanelContainer/VBoxContainer/PanelContainer/AScreen
 @onready var grid_container: GridContainer = $PanelContainer/VBoxContainer/HBoxContainer/KeyContainer 
 @onready var clear_button: Button = $PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/CLEAR
@@ -19,6 +18,7 @@ var digit_timer: Timer = null
 var last_digit: String = ""  
 
 func _ready():
+	num_digits = state.get_code_lenght()
 	setup_buttons()
 	setup_timer()
 	update_display()
@@ -70,9 +70,14 @@ func submit_code():
 	if current_code.length() < num_digits:
 		print("ERROR Min Digits: ", num_digits)
 		return 
-	code_entered.emit(current_code)
 	print("Code entered: ", current_code)
-	clear_code()
+	var sucess = state.validate_code(current_code)
+	print(sucess)
+	if sucess:
+		_on_exit_pressed()
+	else:
+		clear_code()
+	
 
 func update_display():
 	if not display_label:
@@ -115,3 +120,6 @@ func reset():
 
 func _on_key_pressed(value: String) -> void:
 	add_digit(value)
+
+func _on_exit_pressed() -> void:
+	state.hide_keypad()

@@ -6,16 +6,16 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o46p0"]
 shader = ExtResource("1_avyew")
-shader_parameter/key_color = Color(0.09302122, 0.2083019, 0.27566493, 1)
-shader_parameter/key_hover_color = Color(0.35, 0.45, 0.55, 1)
-shader_parameter/key_press_color = Color(0.20392157, 0.80784315, 0.7921569, 1)
-shader_parameter/corner_radius = 0.162000007695
-shader_parameter/shadow_intensity = 0.00400000019
+shader_parameter/key_color = Color(0.0245723, 0.06109768, 0.122504644, 0.11372549)
+shader_parameter/key_hover_color = Color(0.19108787, 0.49971813, 0.44113362, 1)
+shader_parameter/key_press_color = Color(0.29515964, 0.34964302, 0.6034886, 1)
+shader_parameter/corner_radius = 0.2310000109725
+shader_parameter/shadow_intensity = 0.3350000159125
 shader_parameter/is_pressed = false
 shader_parameter/is_hovered = false
 shader_parameter/is_active = false
 shader_parameter/press_animation = 0.0
-shader_parameter/glow_intensity = 0.0
+shader_parameter/glow_intensity = 0.1150000054625
 shader_parameter/smooth_edges = false
 
 [node name="Key" type="Button" unique_id=1583942461]

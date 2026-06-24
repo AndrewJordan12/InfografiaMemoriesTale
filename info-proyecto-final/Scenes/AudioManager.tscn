@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://wpo3radcrqln"]
+
+[ext_resource type="AudioStream" uid="uid://cccwyovs16mg0" path="res://Assets/Sounds/Metronome_Beep.wav" id="1_dygvs"]
+[ext_resource type="Script" uid="uid://c24pmm8be50g8" path="res://Scripts/AudioManager/audio_manager.gd" id="1_u6owb"]
+[ext_resource type="AudioStream" uid="uid://bos6biawjbc46" path="res://Assets/Sounds/Forest Interlude ｜ pseudomorph_0z.wav" id="3_u6owb"]
+
+[node name="AudioManager" type="Node" unique_id=432198332]
+script = ExtResource("1_u6owb")
+
+[node name="FluteMinigame" type="Node" parent="." unique_id=398840011]
+
+[node name="beat_change" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1616563859]
+stream = ExtResource("1_dygvs")
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="Soundtrack" type="Node" parent="." unique_id=369372140]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Soundtrack" unique_id=703955274]
+stream = ExtResource("3_u6owb")

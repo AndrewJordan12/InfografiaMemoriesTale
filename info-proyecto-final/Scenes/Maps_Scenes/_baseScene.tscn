@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbyf7348b2rkf"]
 
 [ext_resource type="Script" uid="uid://day0pvr8c0uw6" path="res://Scripts/Maps_Scripts/_base_scene.gd" id="1_e4yc5"]
+[ext_resource type="Shader" uid="uid://c2burd15r2vpw" path="res://Shaders/pixel.gdshader" id="2_38j7n"]
 [ext_resource type="Texture2D" uid="uid://cy5mpp8rx160" path="res://CollisionMaps/CollisionMap1.png" id="2_g3i0o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ojlq4"]
@@ -41,6 +42,10 @@ terrain_set_0/terrain_0/name = "walls"
 terrain_set_0/terrain_0/color = Color(0.56987953, 0.0016843837, 0.762206, 1)
 sources/0 = SubResource("TileSetAtlasSource_ojlq4")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_38j7n"]
+shader = ExtResource("2_38j7n")
+shader_parameter/tamano_pixel = 5.250000201875
+
 [node name="MapTexture" type="Node2D" unique_id=1652564462]
 script = ExtResource("1_e4yc5")
 
@@ -57,3 +62,13 @@ grow_vertical = 2
 [node name="CollisionLimits" type="TileMapLayer" parent="Background" unique_id=346702876]
 modulate = Color(1, 1, 1, 0.3529412)
 tile_set = SubResource("TileSet_figuv")
+
+[node name="ShaderPixel" type="CanvasLayer" parent="." unique_id=1817975223]
+
+[node name="ColorRect" type="ColorRect" parent="ShaderPixel" unique_id=1400667477]
+material = SubResource("ShaderMaterial_38j7n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dhi8cvn3t412j"]
 
 [ext_resource type="PackedScene" uid="uid://cbyf7348b2rkf" path="res://Scenes/Maps_Scenes/_baseScene.tscn" id="1_24xb2"]
-[ext_resource type="Texture2D" path="res://Assets/Maps/Download/13_MusicMan.png" id="2_c544a"]
+[ext_resource type="Texture2D" uid="uid://upat48ldpebr" path="res://Assets/Maps/13_MusicMan.png" id="2_c544a"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gvplomx3oeql"
-path="res://.godot/imported/9_BridgeBottom.jpg-82db8426562c1dfbebee9953bea88f40.ctex"
+uid="uid://ciqx11c3svgx6"
+path="res://.godot/imported/4_Bust.png-93deae267baea6f5f87fcca782c183ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/9_BridgeBottom.jpg"
-dest_files=["res://.godot/imported/9_BridgeBottom.jpg-82db8426562c1dfbebee9953bea88f40.ctex"]
+source_file="res://Assets/Maps/4_Bust.png"
+dest_files=["res://.godot/imported/4_Bust.png-93deae267baea6f5f87fcca782c183ff.ctex"]
 
 [params]
 

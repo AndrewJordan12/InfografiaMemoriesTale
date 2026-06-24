@@ -1,9 +1,9 @@
 extends Node
 
 var target_scene: String = ""
-var spawn_point: String = "center"
+var spawn_trigger: String = ""
 
-func goto_scene(path: String, spawn: String = "center") -> void:
+func goto_scene(path: String, trigger_name: String = "") -> void:
 	target_scene = path
-	spawn_point = spawn
-	get_tree().change_scene_to_file("res://Scenes/Loading/loading.tscn")
+	spawn_trigger = trigger_name
+	get_tree().call_deferred("change_scene_to_file", "res://Scenes/Loading/loading.tscn")

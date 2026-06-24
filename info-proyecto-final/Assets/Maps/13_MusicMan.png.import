@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8xdud66e2gl1"
-path="res://.godot/imported/3_OneLampTwoBenches.jpg-187da76d1f1c74b6073bb4e5ec990f0d.ctex"
+uid="uid://upat48ldpebr"
+path="res://.godot/imported/13_MusicMan.png-83d7c908d0b80c7e7be931bf3ee9b632.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/3_OneLampTwoBenches.jpg"
-dest_files=["res://.godot/imported/3_OneLampTwoBenches.jpg-187da76d1f1c74b6073bb4e5ec990f0d.ctex"]
+source_file="res://Assets/Maps/13_MusicMan.png"
+dest_files=["res://.godot/imported/13_MusicMan.png-83d7c908d0b80c7e7be931bf3ee9b632.ctex"]
 
 [params]
 

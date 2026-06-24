@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tanq5pgsppkk"
-path="res://.godot/imported/IMG-20260621-WA0003.jpg-376a9c288b0eec328a52b47ae845c91d.ctex"
+uid="uid://bimu2pwo6xyhv"
+path="res://.godot/imported/3_OneLampTwoBenches.png-b43b8621f64f61eefd22288bed31a5aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Maps/IMG-20260621-WA0003.jpg"
-dest_files=["res://.godot/imported/IMG-20260621-WA0003.jpg-376a9c288b0eec328a52b47ae845c91d.ctex"]
+source_file="res://Assets/Maps/3_OneLampTwoBenches.png"
+dest_files=["res://.godot/imported/3_OneLampTwoBenches.png-b43b8621f64f61eefd22288bed31a5aa.ctex"]
 
 [params]
 

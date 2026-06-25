@@ -17,7 +17,7 @@ var keypad_instance
 var ui_layer:CanvasLayer
 
 #fluteminigame
-enum fluteState {PLAYING, STOPPED, IDLE}
+enum fluteState {PLAYING, PREVIEW, IDLE}
 var flute_current_state : fluteState = fluteState.IDLE
 
 func _ready():

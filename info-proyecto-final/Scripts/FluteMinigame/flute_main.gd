@@ -14,11 +14,13 @@ var current_track_name: String = "example_track"
 var beat : int = 0
 var partiture = []
 var beat_current_notes = []
+var preview_active: bool = false
 
 func _ready() -> void:
 	metronome_timer.beat_tick.connect(_on_beat_tick)
 	countdown_timer.timeout.connect(_on_countdown_tick)
 	load_track()
+	grid.setup_preview_manager(track_manager)
 	
 func _process(_delta: float) -> void:
 	##if(State.fluteState.PLAYING):
@@ -26,11 +28,23 @@ func _process(_delta: float) -> void:
 		start_countdown()
 	if Input.is_action_just_pressed("replay"):
 		reset_and_restart()
+	if Input.is_action_just_pressed("preview"):
+		start_preview()
+	
 	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null:
 		store_note(get_input())
 	#grid.draw_partiture(partiture)
 
 func _on_beat_tick():
+	
+	if State.flute_current_state == State.fluteState.PREVIEW:
+		if grid.is_preview_running():
+			grid.preview_beat_tick(beat)
+		
+		grid.update_beat_highlight(beat)
+		beat = (beat + 1) % grid.columns
+		return
+	
 	if not State.flute_current_state == State.fluteState.PLAYING:
 		return  
 	
@@ -49,8 +63,6 @@ func _on_beat_tick():
 func store_note(input : Note.type):
 	if beat_current_notes.size() <= Note.type.size() and !beat_is_repeated(input):
 		beat_current_notes.append(input)
-		# Update the grid with the current beat's notes (replace, not append)
-		print("Inserted in beat: ",beat)
 		grid.add_beat_notes(beat, beat_current_notes)
 		AudioManager.sfx_fluteminigame(enum_to_string(input))#sound according to input
 	else:
@@ -103,7 +115,11 @@ func _on_countdown_tick():
 	else:
 		countdown_timer.stop()
 		countdown_label.visible = false
-		start_playing()
+		
+		if State.flute_current_state == State.fluteState.PREVIEW:
+			start_preview_playing()
+		else:
+			start_playing()
 #endregion
 
 #region UI controls
@@ -122,10 +138,8 @@ func check_win_condition():
 	var grid_notes = grid.get_all_notes() 
 	
 	if track_manager.compare_track(grid_notes):
-		print("WINNER!")
 		on_win()
 	else:
-		print("YOU MISSED HSAHHA")
 		on_lose()
 
 func on_win():
@@ -135,7 +149,6 @@ func on_win():
 
 func on_lose():
 	stop_playing()
-	print_player_notes()
 	countdown_label.text = "❌"
 	countdown_label.visible = true
 
@@ -148,6 +161,37 @@ func reset_and_restart():
 	start_countdown()
 #endregion
 
+#region preview
+func start_preview():
+	if track_manager.current_track.is_empty():
+		print("No track to preview")
+		return
+	
+	State.flute_current_state = State.fluteState.PREVIEW
+	preview_active = true
+	beat = 0
+	grid.update_beat_highlight(-1)
+	
+	# Start preview with callback
+	if grid.start_preview(Callable(self, "_on_preview_complete")):
+		countdown_label.visible = true
+		countdown_label.text = "3"
+		countdown_timer.start()
+
+func _on_preview_complete():
+	# Returns to IDLE afterpreview
+	grid.update_beat_highlight(-1)
+	toggle_metronome()
+	State.flute_current_state = State.fluteState.IDLE
+	preview_active = false
+	grid.stop_preview()
+	countdown_label.visible = false
+
+func start_preview_playing():
+	toggle_metronome()
+	beat = 0
+#endregion
+
 #region helper functions
 func enum_to_string(type: Note.type) -> String:
 	return Note.type.keys()[type]
@@ -155,14 +199,14 @@ func enum_to_string(type: Note.type) -> String:
 func toggle_metronome():
 	loop_metronome = !loop_metronome
 	if metronome_timer.is_stopped():
-		metronome_timer.one_shot = !loop_metronome  # If loop is false, one_shot should be true
+		metronome_timer.one_shot = !loop_metronome
 		metronome_timer.start()
 		print("Loop: ", loop_metronome)
 	else:
 		metronome_timer.stop()
 
-# Add this function to print the player's notes
-func print_player_notes():
+# used it to check if win condition is correct
+func _print_player_notes():
 	var json_string = grid.get_notes_as_json()
 	print("=== Player Notes ===\n")
 	print(json_string)

@@ -8,10 +8,13 @@ extends Control
 var note_references: Dictionary = {}
 var last_updated_beat: int = -1
 
+var preview_manager: PreviewManager
+
 func _ready() -> void:
 	create_highlights() #creates appropiate amount of highlights
 	update_beat_highlight(-1) #hides all already placed highlights by default
 	create_notes() # #Clears notes in the scene and fills the grid with invisible notes
+	preview_manager = PreviewManager.new()
 	
 #region create and clear notes
 #Clears notes in the scene and fills the grid with invisible notes
@@ -65,6 +68,9 @@ func add_beat_notes(beat: int, notes: Array):
 #region draw current grid
 #the function that updated the partiture
 func update_grid_display():
+	if (preview_manager and preview_manager.is_running()):
+		return
+	
 	hide_all_notes() #puts all notes in alpha 0.0
 	
 	for beat_index in note_references:
@@ -140,6 +146,28 @@ func update_beat_highlight(beat: int):
 		AudioManager.sfx_fluteminigame("beat_change")
 #endregion
 
+#region preview
+func setup_preview_manager(track_manager: TrackManager):
+	preview_manager.initialize(self, track_manager, columns)
+	add_child(preview_manager)
+	
+func start_preview(callback: Callable = Callable()) -> bool:
+	if preview_manager:
+		return preview_manager.start_preview(callback)
+	return false
+
+func preview_beat_tick(beat: int):
+	if preview_manager:
+		preview_manager.on_beat_tick(beat)
+
+func is_preview_running() -> bool:
+	return preview_manager and preview_manager.is_running()
+
+func stop_preview():
+	if preview_manager:
+		preview_manager.stop_preview()
+#endregion
+
 #region helper methods
 				
 func get_row_index_for_note_type(note_type: Note.type) -> int:
@@ -187,8 +215,8 @@ func get_notes_as_json() -> String:
 	
 	var json_string = JSON.stringify(data, "\t")
 	return json_string
-#endregion
-
+	
 # Add this function to get all grid notes in the correct format
 func get_all_notes() -> Dictionary:
 	return note_references.duplicate(true)
+#endregion

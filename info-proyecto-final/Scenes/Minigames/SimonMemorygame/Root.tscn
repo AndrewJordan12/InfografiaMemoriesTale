@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://cwbrlkahrg6bm"]
+
+[ext_resource type="Texture2D" uid="uid://backtuadtrfps" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Red.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://3xagnms7lp5e" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Red_press.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cdl62qtv61i15" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Green.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://tehgbn05ydu1" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Green_press.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ds3m5xpt15avb" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Blue.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b8n8uvlvrqjka" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Blue_press.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dpo0oqcavsjep" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Yellow.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dsblxgviwxefc" path="res://Scenes/Minigames/SimonMemorygame/Buttons/Yellow_press.png" id="8"]
+[ext_resource type="Script" uid="uid://c2bylmn0bxcw2" path="res://Scenes/Minigames/SimonMemorygame/Root.gd" id="10"]
+[ext_resource type="AudioStream" uid="uid://ddfqngx4k4j72" path="res://Scenes/Minigames/SimonMemorygame/sfx/do.wav" id="11"]
+[ext_resource type="AudioStream" uid="uid://dqurbwf6w0to0" path="res://Scenes/Minigames/SimonMemorygame/sfx/fa.wav" id="12"]
+[ext_resource type="AudioStream" uid="uid://n2cf6htdurbc" path="res://Scenes/Minigames/SimonMemorygame/sfx/re.wav" id="13"]
+[ext_resource type="AudioStream" uid="uid://cfekj4xulimj" path="res://Scenes/Minigames/SimonMemorygame/sfx/mi.wav" id="14"]
+[ext_resource type="AudioStream" uid="uid://c5pkrpq1lhcom" path="res://Scenes/Minigames/SimonMemorygame/sfx/error.wav" id="15"]
+[ext_resource type="Shader" uid="uid://4dwjqhws1irn" path="res://Scenes/Minigames/SimonMemorygame/grain_shader.gdshader" id="16"]
+[ext_resource type="Texture2D" uid="uid://bou45tuunarw8" path="res://Scenes/Minigames/SimonMemorygame/Screamer/001.png" id="17"]
+[ext_resource type="AudioStream" path="res://Scenes/Minigames/SimonMemorygame/Screamer/sound/001.wav" id="18"]
+
+[sub_resource type="ShaderMaterial" id="GrainMat"]
+shader = ExtResource("16")
+shader_parameter/grain_opacity = 0.3
+shader_parameter/grain_speed = 18.0
+
+[node name="Root" type="Control" unique_id=402873322]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10")
+
+[node name="DarkBg" type="ColorRect" parent="." unique_id=291376493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Buttons" type="CenterContainer" parent="." unique_id=920200455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="GridContainer" parent="Buttons" unique_id=1542391815]
+layout_mode = 2
+columns = 2
+
+[node name="Red" type="TextureButton" parent="Buttons/Grid" unique_id=266854483]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("1")
+texture_pressed = ExtResource("2")
+
+[node name="Flash" type="ColorRect" parent="Buttons/Grid/Red" unique_id=1568022777]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.6)
+
+[node name="Green" type="TextureButton" parent="Buttons/Grid" unique_id=674953967]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("3")
+texture_pressed = ExtResource("4")
+
+[node name="Flash" type="ColorRect" parent="Buttons/Grid/Green" unique_id=1840454625]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.6)
+
+[node name="Yellow" type="TextureButton" parent="Buttons/Grid" unique_id=1323561587]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("7")
+texture_pressed = ExtResource("8")
+
+[node name="Flash" type="ColorRect" parent="Buttons/Grid/Yellow" unique_id=927507499]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.6)
+
+[node name="Blue" type="TextureButton" parent="Buttons/Grid" unique_id=1713291190]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("6")
+
+[node name="Flash" type="ColorRect" parent="Buttons/Grid/Blue" unique_id=1784016953]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.6)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1548829352]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 100.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=648508054]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LevelLabel" type="Label" parent="Panel/VBox" unique_id=138220021]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.15, 0.15, 1)
+theme_override_font_sizes/font_size = 22
+text = "Nivel: 1 / 4"
+horizontal_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="Panel/VBox" unique_id=1456243938]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 14
+text = "Presiona INICIAR"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="Panel/VBox" unique_id=651245804]
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+text = "INICIAR"
+
+[node name="sfx" type="Node" parent="." unique_id=107667151]
+
+[node name="Do" type="AudioStreamPlayer" parent="sfx" unique_id=1777004204]
+stream = ExtResource("11")
+
+[node name="Re" type="AudioStreamPlayer" parent="sfx" unique_id=865982282]
+stream = ExtResource("13")
+
+[node name="Mi" type="AudioStreamPlayer" parent="sfx" unique_id=655402740]
+stream = ExtResource("14")
+
+[node name="Fa" type="AudioStreamPlayer" parent="sfx" unique_id=1025211799]
+stream = ExtResource("12")
+
+[node name="error" type="AudioStreamPlayer" parent="sfx" unique_id=634034575]
+stream = ExtResource("15")
+
+[node name="GrainOverlay" type="ColorRect" parent="." unique_id=55370614]
+material = SubResource("GrainMat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ScreamerLayer" type="CanvasLayer" parent="." unique_id=1033819159]
+
+[node name="BlackOverlay" type="ColorRect" parent="ScreamerLayer" unique_id=774128209]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScreamerImage" type="TextureRect" parent="ScreamerLayer"]
+visible = false
+mouse_filter = 2
+texture = ExtResource("17")
+
+[node name="ScreamerSound" type="AudioStreamPlayer" parent="ScreamerLayer"]
+stream = ExtResource("18")
+
+[node name="FailMenu" type="CanvasLayer" parent="."]
+
+[node name="BlackBg" type="ColorRect" parent="FailMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Panel" type="PanelContainer" parent="FailMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="FailMenu/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="FailLabel" type="Label" parent="FailMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Volver a la normalidad?"
+horizontal_alignment = 1
+
+[node name="BtnYes" type="Button" parent="FailMenu/Panel/VBox"]
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+text = "Si"
+
+[node name="BtnNo" type="Button" parent="FailMenu/Panel/VBox"]
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+text = "No"
+
+[connection signal="button_up" from="Buttons/Grid/Red" to="." method="_checkPlayerButton" binds= [0]]
+[connection signal="button_up" from="Buttons/Grid/Green" to="." method="_checkPlayerButton" binds= [1]]
+[connection signal="button_up" from="Buttons/Grid/Yellow" to="." method="_checkPlayerButton" binds= [2]]
+[connection signal="button_up" from="Buttons/Grid/Blue" to="." method="_checkPlayerButton" binds= [3]]
+[connection signal="pressed" from="Panel/VBox/StartButton" to="." method="_on_start_pressed"]

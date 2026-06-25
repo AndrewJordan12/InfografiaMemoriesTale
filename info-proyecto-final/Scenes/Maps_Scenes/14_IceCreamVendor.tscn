@@ -5,16 +5,26 @@
 [ext_resource type="Script" uid="uid://bojgcpxjkumce" path="res://Scripts/Maps_Scripts/14_ice_cream_vendor.gd" id="2_vf7sy"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
-[ext_resource type="PackedScene" uid="uid://dfiwm1eo4628e" path="res://Scenes/Minigame/ShuffleCup.tscn" id="6_lnfer"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
+[ext_resource type="PackedScene" uid="uid://dfiwm1eo4628e" path="res://Scenes/Minigame/ShuffleCup.tscn" id="7_lnfer"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeft"]
-size = Vector2(7, 208)
+size = Vector2(16, 279)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(130, 264)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottomMusicTrigger"]
-size = Vector2(540, 10)
+size = Vector2(540, 14)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(411, 84)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightForestTrigger"]
-size = Vector2(612, 10)
+size = Vector2(641, 14)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
+size = Vector2(638, 88)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_cgvwi")]
 script = ExtResource("2_vf7sy")
@@ -33,30 +43,63 @@ position = Vector2(251.99998, 505)
 position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/1_Entrance.tscn"
+spawn_marker = "RightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=1608295391]
-position = Vector2(3.5, 212)
+position = Vector2(8, 380.5)
 shape = SubResource("ShapeLeft")
+
+[node name="ShowNextAreaName" type="Area2D" parent="LeftTrigger" index="1" unique_id=1544321518]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger/ShowNextAreaName" index="0" unique_id=1752411836]
+position = Vector2(65, 373)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="LeftTrigger" index="2" unique_id=853132316]
+position = Vector2(131, 370)
 
 [node name="BottomLeftTrigger" type="Area2D" parent="." index="3" unique_id=457189068]
 position = Vector2(384, 648)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/13_MusicMan.tscn"
+spawn_marker = "RightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomLeftTrigger" index="0" unique_id=680832242]
-position = Vector2(-114, -13)
+position = Vector2(-114, 189)
 shape = SubResource("ShapeBottomMusicTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="BottomLeftTrigger" index="1" unique_id=74288651]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomLeftTrigger/ShowNextAreaName" index="0" unique_id=1972729382]
+position = Vector2(-47.5, 150)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomLeftTrigger" index="2" unique_id=879906781]
+position = Vector2(-36, 109)
 
 [node name="BottomRightTrigger" type="Area2D" parent="." index="4" unique_id=550965802]
 position = Vector2(768, 648)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/12_ForestPath.tscn"
+spawn_marker = "TransitionZone"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomRightTrigger" index="0" unique_id=2147140174]
-position = Vector2(78, -13)
+position = Vector2(92.5, 189)
 shape = SubResource("ShapeRightForestTrigger")
 
-[node name="ShuffleCup" parent="." index="6" unique_id=712689087 instance=ExtResource("6_lnfer")]
+[node name="ShowNextAreaName" type="Area2D" parent="BottomRightTrigger" index="1" unique_id=454829777]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomRightTrigger/ShowNextAreaName" index="0" unique_id=2087670417]
+position = Vector2(93, 152)
+shape = SubResource("ShowNextAreaNameShape2")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomRightTrigger" index="2" unique_id=416560166]
+position = Vector2(94, 111)
+
+[node name="ShuffleCup" parent="." index="6" unique_id=712689087 instance=ExtResource("7_lnfer")]
 visible = false
 z_index = 100
 

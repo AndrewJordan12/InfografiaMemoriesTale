@@ -4,15 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://bimu2pwo6xyhv" path="res://Assets/Maps/3_OneLampTwoBenches.png" id="2_rrbpf"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeTopEntranceTrigger"]
-size = Vector2(96, 6)
+size = Vector2(86, 7)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(160, 104)
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftBridgeTrigger"]
-size = Vector2(10.25, 163)
+size = Vector2(9, 220)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(132, 278)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightBustTrigger"]
-size = Vector2(8, 121)
+size = Vector2(13, 161)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
+size = Vector2(99, 223)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_6uq7p")]
 receiver_id = "3"
@@ -32,25 +42,58 @@ position = Vector2(328.00006, 429)
 position = Vector2(836, 373)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/4_Bust.tscn"
+spawn_marker = "TopRightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopEntranceTrigger" index="0" unique_id=265801572]
-position = Vector2(-4, -2)
+position = Vector2(-89, 28.5)
 shape = SubResource("ShapeTopEntranceTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="TopEntranceTrigger" index="1" unique_id=1348728136]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopEntranceTrigger/ShowNextAreaName" index="0" unique_id=2093214585]
+position = Vector2(-89, 29)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="TopEntranceTrigger" index="2" unique_id=1950557837]
+position = Vector2(-86, 82)
 
 [node name="LeftBridgeTrigger" type="Area2D" parent="." index="3" unique_id=101328062]
 position = Vector2(0, 529)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/8_BridgeMiddle.tscn"
+spawn_marker = "RightBottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBridgeTrigger" index="0" unique_id=10452021]
-position = Vector2(4.875, 15)
+position = Vector2(4.5, 181)
 shape = SubResource("ShapeLeftBridgeTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="LeftBridgeTrigger" index="1" unique_id=300690057]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftBridgeTrigger/ShowNextAreaName" index="0" unique_id=450267246]
+position = Vector2(66, 176)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="LeftBridgeTrigger" index="2" unique_id=1806690722]
+position = Vector2(134, 181)
 
 [node name="RightBustTrigger" type="Area2D" parent="." index="4" unique_id=226230631]
 position = Vector2(1150, 531)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/1_Entrance.tscn"
+spawn_marker = "LeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBustTrigger" index="0" unique_id=932865626]
-position = Vector2(-2, -58.5)
+position = Vector2(23.5, 89.5)
 shape = SubResource("ShapeRightBustTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightBustTrigger" index="1" unique_id=119313952]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBustTrigger/ShowNextAreaName" index="0" unique_id=554023506]
+position = Vector2(-18.5, 90.5)
+shape = SubResource("ShowNextAreaNameShape2")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightBustTrigger" index="2" unique_id=470370908]
+position = Vector2(-64, 90)

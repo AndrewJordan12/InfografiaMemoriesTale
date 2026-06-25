@@ -5,15 +5,25 @@
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_qfeks"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 [ext_resource type="Script" uid="uid://bnialaf8ajx6a" path="res://Scripts/Maps_Scripts/entrance_scene.gd" id="5_escn"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeft"]
-size = Vector2(8.5, 136)
+size = Vector2(8.5, 267)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(93, 268.125)
 
 [sub_resource type="RectangleShape2D" id="ShapeRight"]
-size = Vector2(8.5, 183)
+size = Vector2(8.5, 283.5)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(87, 285.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottom"]
-size = Vector2(1152, 8.5)
+size = Vector2(1201, 13)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
+size = Vector2(1021, 75.25)
 
 [node name="TextureRect" unique_id=518045972 instance=ExtResource("1_mmhnc")]
 script = ExtResource("5_escn")
@@ -40,25 +50,64 @@ position = Vector2(575.1388, 535.2501)
 position = Vector2(7, 576)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/3_OneLampTwoBenches.tscn"
+spawn_marker = "RightBustTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=444485126]
-position = Vector2(-2.75, 4)
+position = Vector2(-2.75, 166.5)
 shape = SubResource("ShapeLeft")
+
+[node name="ShowNextAreaName" type="Area2D" parent="LeftTrigger" index="1" unique_id=684193775]
+position = Vector2(39.5, 166.0625)
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger/ShowNextAreaName" index="0" unique_id=1813909654]
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="LeftTrigger" index="2" unique_id=2085909099]
+position = Vector2(86, 167)
 
 [node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=2111396686]
 position = Vector2(1145, 545)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
+spawn_marker = "LeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1965848980]
-position = Vector2(2.75, 11)
+position = Vector2(51.75, 188.75)
 shape = SubResource("ShapeRight")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightTrigger" index="1" unique_id=1026566694]
+position = Vector2(12.5, 188.625)
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger/ShowNextAreaName" index="0" unique_id=1097077067]
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=848129331]
+position = Vector2(-33, 190)
 
 [node name="BottomTrigger" type="Area2D" parent="." index="4" unique_id=883470205]
 position = Vector2(580, 644)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/13_MusicMan.tscn"
+spawn_marker = "TopTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger" index="0" unique_id=2019271709]
-position = Vector2(-4, -0.25)
+position = Vector2(20.5, 225.5)
 shape = SubResource("ShapeBottom")
+
+[node name="ShowNextAreaName" type="Area2D" parent="BottomTrigger" index="1" unique_id=1704046071]
+position = Vector2(23.5, 194.625)
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger/ShowNextAreaName" index="0" unique_id=681264284]
+shape = SubResource("ShowNextAreaNameShape2")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomTrigger" index="2" unique_id=1148383801]
+position = Vector2(22, 157)
+
+[node name="ColorRect" parent="ShaderPixel" parent_id_path=PackedInt32Array(1817975223) index="0" unique_id=1400667477]
+offset_left = -2.0
+offset_top = 7.0
+offset_right = -2.0
+offset_bottom = 7.0

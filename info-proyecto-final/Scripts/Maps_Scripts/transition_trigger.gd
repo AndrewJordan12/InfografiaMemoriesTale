@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var target_scene: String = ""
+@export var spawn_marker: String = ""
 
 var _player: CharacterBody2D
 var _triggered: bool = false
@@ -18,7 +19,7 @@ func _process(delta: float) -> void:
 		_bubble_timer -= delta
 		if _bubble_timer <= 0.0:
 			_waiting = false
-			SceneTransition.goto_scene(target_scene, name)
+			SceneTransition.goto_scene(target_scene, name, spawn_marker)
 
 func _get_destination_text() -> String:
 	var names = {

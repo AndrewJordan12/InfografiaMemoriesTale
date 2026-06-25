@@ -191,7 +191,10 @@ layout_mode = 2
 script = ExtResource("7_wi5h2")
 bpm = 100.0
 
-[node name="ThreeTwoOneGo" type="Label" parent="." unique_id=1088370608]
+[node name="Countdown_Timer" type="Timer" parent="." unique_id=1446506421]
+
+[node name="Countdown" type="Label" parent="." unique_id=1088370608]
+visible = false
 offset_left = 28.0
 offset_top = 516.0
 offset_right = 118.0

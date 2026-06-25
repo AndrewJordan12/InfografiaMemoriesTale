@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SceneTransition="*res://Scripts/SceneTransition/scene_transition.gd"
 State="*uid://csu0de4q6mo4n"
+AudioManager="*uid://wpo3radcrqln"
 
 [display]
 

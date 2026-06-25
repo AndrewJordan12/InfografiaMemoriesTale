@@ -16,6 +16,10 @@ var keypad_scene = preload("res://Scenes/UI/Keypad.tscn")
 var keypad_instance 
 var ui_layer:CanvasLayer
 
+#fluteminigame
+enum fluteState {PLAYING, PREVIEW, IDLE}
+var flute_current_state : fluteState = fluteState.IDLE
+
 func _ready():
 	generate_puzzle()
 	init_ui()
@@ -27,6 +31,8 @@ func init_ui():
 	keypad_instance = keypad_scene.instantiate()
 	ui_layer.add_child.call_deferred(keypad_instance)
 	keypad_instance.visible = false
+	
+#region code generation and validation
 
 func generate_puzzle():
 	secret_code.clear()
@@ -71,9 +77,22 @@ func show_keypad():
 	
 func hide_keypad():
 	keypad_instance.visible = false
+#endregion
 
 func on_failed():
 	print("Failed")
 	
 func on_won():
 	print("WON")
+
+#Flute minigame
+#region fluteminigame
+func flute_start():
+	flute_current_state = fluteState.PLAYING
+	
+func flute_stop():
+	flute_current_state = fluteState.PLAYING
+	
+func flute_exit():
+	flute_current_state = fluteState.PLAYING
+#endregion

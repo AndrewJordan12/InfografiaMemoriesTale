@@ -60,5 +60,4 @@ shape = SubResource("ShapeRightForestTrigger")
 visible = false
 z_index = 100
 
-[connection signal="close" from="ShuffleCup" to="." method="_on_shuffle_cup_close"]
 [connection signal="puzzle_ended" from="ShuffleCup" to="." method="_on_shuffle_cup_puzzle_ended"]

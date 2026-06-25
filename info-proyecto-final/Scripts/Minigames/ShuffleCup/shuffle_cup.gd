@@ -9,33 +9,36 @@ signal puzzle_ended(won:bool)
 @onready var cup_scene = preload("res://Scenes/Minigame/Cup.tscn")
 @onready var score_label = $Score
 @onready var attempts_label = $Attempts
+@onready var ball = $Ball
 
 var current_level := 1
 var visible_cups : Array = []
 var original_positions := {}
-var ball_cup : Button
+var ball_index := 0
+const BALL_OFFSET := Vector2(70, 165) 
 var accepting_input := false
-var attempts:int = 3
-
+var max_attempts : int = 3
+var attempts : int = max_attempts
 const MAX_CUPS := 5
 
 const LEVELS = {
 	1: {
 		"cups": 3,
-		"shuffles": 10
+		"shuffles": 1
 	},
 	2: {
 		"cups": 4,
-		"shuffles": 12
+		"shuffles": 1
 	},
 	3: {
 		"cups": 5,
-		"shuffles": 15
+		"shuffles": 1
 	}
 }
 
 func _ready():
-	await  start()
+	pass
+	#await start()
 
 func start():
 	await create_cups()
@@ -58,8 +61,6 @@ func create_cups():
 		var start_x = (panel_width - row_width) * 0.5
 		cup.position = Vector2(start_x + col * (cup_size.x + spacing),row * (cup_size.y + spacing))
 		original_positions[cup] = cup.position
-		print(cup.position)
-	print("Created:", cups_parent.get_child_count())
 
 func start_level(level:int):
 	visible = true
@@ -70,10 +71,20 @@ func start_level(level:int):
 	await reset_cups()
 	var config = LEVELS[current_level]
 	setup_cups(config.cups)
-	ball_cup = visible_cups.pick_random()
-	await ball_cup.reveal_ball()
+	ball.visible = false
+	ball_index = randi() % visible_cups.size()
+	update_ball_position()
+	await visible_cups[ball_index].raise_cup()
+	ball.visible = true
+	await get_tree().create_timer(1.5).timeout
+	await visible_cups[ball_index].lower_cup()
+	ball.visible = false
 	await shuffle_sequence(config.shuffles)
 	accepting_input = true
+
+func update_ball_position():
+	var cup = visible_cups[ball_index]
+	ball.global_position = cup.global_position + BALL_OFFSET
 
 func setup_cups(count:int):
 	visible_cups.clear()
@@ -87,10 +98,11 @@ func setup_cups(count:int):
 
 func reset_cups():
 	for cup in cups_parent.get_children():
-		cup.position = original_positions[cup]
 		if cup.is_raised:
 			await cup.lower_cup()
+		cup.position = original_positions[cup]
 		cup.update_start_position()
+	ball.visible = false
 
 func shuffle_sequence(shuffle_count:int):
 	for i in range(shuffle_count):
@@ -107,23 +119,25 @@ func swap_cups(a:int, b:int):
 	await cup_a.swap_with(cup_b)
 	visible_cups[a] = cup_b
 	visible_cups[b] = cup_a
-	if ball_cup == cup_a:
-		ball_cup = cup_b
-	elif ball_cup == cup_b:
-		ball_cup = cup_a
+	if ball_index == a:
+		ball_index = b
+	elif ball_index == b:
+		ball_index = a
+	update_ball_position()
 
 func _on_cup_selected(cup):
 	print("CLICKED", cup)
 	if !accepting_input:
 		return
 	accepting_input = false
-	if cup == ball_cup:
+	if cup == visible_cups[ball_index]:
 		await handle_win()
 	else:
 		await handle_fail()
 
 func handle_win():
-	await ball_cup.raise_cup()
+	ball.visible = true
+	await visible_cups[ball_index].raise_cup()
 	var max_level = LEVELS.size()
 	if current_level < max_level:
 		await get_tree().create_timer(1.0).timeout
@@ -135,7 +149,8 @@ func handle_win():
 func handle_fail():
 	attempts -= 1
 	attempts_label.text = "Attempts" + str(attempts)
-	await ball_cup.raise_cup()
+	ball.visible = true
+	await visible_cups[ball_index].raise_cup()
 	if attempts <= 0:
 		gameover.set_state(false, false)
 		puzzle_ended.emit(false)
@@ -143,6 +158,7 @@ func handle_fail():
 		retry()
 
 func retry():
+	attempts = max_attempts
 	await start_level(current_level)
 
 func on_win(digit:int):

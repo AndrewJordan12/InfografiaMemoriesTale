@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://bw7rmginuja6c" path="res://Shaders/Keypad.gdshader" id="2_xpof3"]
 [ext_resource type="LabelSettings" uid="uid://b6xs1v51rv1xa" path="res://Theme/CupScore.tres" id="4_be560"]
 [ext_resource type="PackedScene" uid="uid://dsc5wtp3whhp1" path="res://Scenes/Minigame/GameOver.tscn" id="4_lai3x"]
+[ext_resource type="Texture2D" uid="uid://c8ukcpjmhku56" path="res://Assets/ShuffleCup/ball.png" id="5_xpof3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gh5ow"]
 shader = ExtResource("2_xpof3")
@@ -56,6 +57,13 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="GameOver" parent="." unique_id=1490350559 instance=ExtResource("4_lai3x")]
+
+[node name="Ball" type="TextureRect" parent="." unique_id=1752718466]
+offset_right = 136.0
+offset_bottom = 136.0
+scale = Vector2(0.6, 0.6)
+mouse_filter = 2
+texture = ExtResource("5_xpof3")
 
 [connection signal="on_X" from="GameOver" to="." method="_on_game_over_on_x"]
 [connection signal="on_retry" from="GameOver" to="." method="_on_game_over_on_retry"]

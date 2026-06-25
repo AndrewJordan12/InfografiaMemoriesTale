@@ -18,6 +18,15 @@ func _ready() -> void:
 	digit = main.get_digit(receiver_id)
 	if digit != -1:
 		assign_digit(digit)
+	if SceneTransition.minigame_won and SceneTransition.return_trigger_name != "":
+		_disable_minigame_trigger()
+		SceneTransition.minigame_won = false
+		SceneTransition.return_trigger_name = ""
+
+func _disable_minigame_trigger() -> void:
+	var trigger = get_node_or_null(SceneTransition.return_trigger_name)
+	if trigger and trigger.has_method("disable_trigger"):
+		trigger.disable_trigger()
 
 func _position_player() -> void:
 	var player = get_node_or_null("Player")

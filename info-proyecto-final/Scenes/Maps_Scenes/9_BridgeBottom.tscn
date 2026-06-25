@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 [ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
+[ext_resource type="Script" uid="uid://gtxap4vacrfe" path="res://Scripts/Maps_Scripts/minigame_trigger.gd" id="7_mingame"]
 
 [sub_resource type="RectangleShape2D" id="ShapeTopBridgeTrigger"]
 size = Vector2(192, 5)
@@ -23,6 +24,9 @@ size = Vector2(10, 393)
 
 [sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
 size = Vector2(65, 385)
+
+[sub_resource type="RectangleShape2D" id="ShapeMinigameTrigger"]
+size = Vector2(13, 324)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_kj3bd")]
 receiver_id = "9"
@@ -96,3 +100,16 @@ shape = SubResource("ShowNextAreaNameShape2")
 
 [node name="Spawnpoint" type="Marker2D" parent="RightBottomTrigger" index="2" unique_id=1502303486]
 position = Vector2(-98, 241)
+
+[node name="MinigameTrigger" type="Area2D" parent="." index="5" unique_id=1119838686]
+position = Vector2(0, 324)
+script = ExtResource("7_mingame")
+target_scene = "res://Scenes/Minigames/SimonMemorygame/Root.tscn"
+trigger_name = "MinigameTrigger"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MinigameTrigger" index="0" unique_id=584121739]
+position = Vector2(8.5, 288)
+shape = SubResource("ShapeMinigameTrigger")
+
+[node name="Spawnpoint" type="Marker2D" parent="MinigameTrigger" index="1"]
+position = Vector2(150, 0)

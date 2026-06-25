@@ -10,9 +10,9 @@ script = ExtResource("1_s6m7x")
 [node name="PopUp" type="VBoxContainer" parent="." unique_id=2065389466]
 custom_minimum_size = Vector2(800, 0)
 offset_left = 200.0
-offset_top = 200.0
+offset_top = 300.0
 offset_right = 1000.0
-offset_bottom = 479.0
+offset_bottom = 629.0
 
 [node name="Label" type="Label" parent="PopUp" unique_id=1164613907]
 layout_mode = 2
@@ -26,7 +26,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 10
 text = "TRY AGAIN"
 flat = true
 

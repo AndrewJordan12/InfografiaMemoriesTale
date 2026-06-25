@@ -1,7 +1,6 @@
 extends Node2D
 
 signal puzzle_ended(won:bool)
-signal close
 
 @export var reward_digit := 0
 
@@ -26,25 +25,24 @@ const LEVELS = {
 		"shuffles": 10
 	},
 	2: {
-		"cups": 5,
+		"cups": 4,
 		"shuffles": 12
 	},
 	3: {
-		"cups": 8,
+		"cups": 5,
 		"shuffles": 15
 	}
 }
 
 func _ready():
-	await create_cups()
+	await  start()
 
 func start():
-	attempts_label = "Attempts" + str(attempts)
-	score_label.text = "Level:"+ str(current_level) + "/" + str(LEVELS.size())
+	await create_cups()
 	await start_level(1)
 
 func create_cups():
-	var cup_size := Vector2(160, 200)
+	var cup_size := Vector2(200, 240)
 	var spacing := 30.0
 	await get_tree().process_frame
 	var panel_width = max($PanelContainer.size.x, 500.0)
@@ -52,7 +50,7 @@ func create_cups():
 	for i in range(MAX_CUPS):
 		var cup: Button = cup_scene.instantiate()
 		cups_parent.add_child(cup)
-		cup.pressed.connect(func():_on_cup_selected(cup))
+		cup.pressed.connect(_on_cup_selected.bind(cup))
 		var row = i / cups_per_row
 		var col = i % cups_per_row
 		var row_count = min(cups_per_row,MAX_CUPS - row * cups_per_row)
@@ -60,10 +58,14 @@ func create_cups():
 		var start_x = (panel_width - row_width) * 0.5
 		cup.position = Vector2(start_x + col * (cup_size.x + spacing),row * (cup_size.y + spacing))
 		original_positions[cup] = cup.position
+		print(cup.position)
 	print("Created:", cups_parent.get_child_count())
 
 func start_level(level:int):
+	visible = true
 	current_level = level
+	attempts_label.text = "Attempts: " + str(attempts)
+	score_label.text = "Level:"+ str(current_level) + "/" + str(LEVELS.size())
 	accepting_input = false
 	await reset_cups()
 	var config = LEVELS[current_level]
@@ -111,6 +113,7 @@ func swap_cups(a:int, b:int):
 		ball_cup = cup_a
 
 func _on_cup_selected(cup):
+	print("CLICKED", cup)
 	if !accepting_input:
 		return
 	accepting_input = false
@@ -131,10 +134,10 @@ func handle_win():
 
 func handle_fail():
 	attempts -= 1
-	attempts_label = "Attempts" + str(attempts)
+	attempts_label.text = "Attempts" + str(attempts)
 	await ball_cup.raise_cup()
 	if attempts <= 0:
-		gameover.set_state(false)
+		gameover.set_state(false, false)
 		puzzle_ended.emit(false)
 	else:
 		retry()
@@ -148,6 +151,5 @@ func on_win(digit:int):
 func _on_game_over_on_retry() -> void:
 	await  start_level(1)
 
-
 func _on_game_over_on_x() -> void:
-	close.emit()
+	visible = false

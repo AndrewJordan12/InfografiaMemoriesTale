@@ -5,15 +5,10 @@
 
 [node name="Cup" type="Button" unique_id=1611660113]
 custom_minimum_size = Vector2(200, 240)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -4.0
-offset_right = 4.0
-offset_bottom = 8.0
-grow_horizontal = 2
-flat = true
+offset_right = 200.0
+offset_bottom = 240.0
 script = ExtResource("1_xeihw")
+swap_duration = 0.25
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=931546929]
 custom_minimum_size = Vector2(160, 200)
@@ -22,6 +17,7 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 180.0
 offset_bottom = 220.0
+mouse_filter = 2
 texture = ExtResource("2_ka4ee")
 expand_mode = 1
 stretch_mode = 5

@@ -11,11 +11,13 @@ var win_msg :String = "YOU WON \nCODE: "
 var lose_msg : String = "YOU LOST :("
 
 func _ready() -> void:
-	GOLabel.visible = false
-	retry.visible = false
-	X.visible = false
+	#GOLabel.visible = false
+	#retry.visible = false
+	#X.visible = false
+	visible = false
 	
 func set_state(value:bool, digit):
+	visible = true
 	if value == true:
 		GOLabel.text = win_msg + str(digit)
 		retry.disabled = true
@@ -28,7 +30,9 @@ func set_state(value:bool, digit):
 
 func _on_x_pressed() -> void:
 	on_X.emit()
+	visible = false
 
 
 func _on_retry_pressed() -> void:
 	on_retry.emit()
+	visible = false

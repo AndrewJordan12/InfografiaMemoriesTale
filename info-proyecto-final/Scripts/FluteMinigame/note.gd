@@ -9,14 +9,14 @@ class_name Note
 
 enum type {LEFT, RIGHT, UP, DOWN, SPACE}
 
+var note_type: type = type.LEFT #default
+var fresh: bool = false
+
 func _ready() -> void:
-	if type:
-		set_note_value()
-	else:
-		print("Your note doesnt have type...wait. What.")
+	set_note_value()
 
 func set_note_value():
-	match type:
+	match note_type: 
 		type.UP:
 			texture = sprite_up
 		type.DOWN:
@@ -27,3 +27,7 @@ func set_note_value():
 			texture = sprite_right
 		type.SPACE:
 			texture = sprite_space
+
+func change_type(new_type: type):
+	note_type = new_type
+	set_note_value()  # Update the texture

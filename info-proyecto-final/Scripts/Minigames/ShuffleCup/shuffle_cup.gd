@@ -21,8 +21,8 @@ const MAX_CUPS := 5
 
 const LEVELS = {
 	1: {
-		"cups": 3,
-		"shuffles": 1
+		"cups":5,
+		"shuffles": 10
 	},
 	2: {
 		"cups": 4,

@@ -1,11 +1,12 @@
 extends CharacterBody2D
-
+@onready var animated_sprite = $AnimatedSprite2D
 @export var speed: float = 300.0
 @export var acceleration: float = 10.0
 @export var friction: float = 15.0
 
 var bubble_text: String = ""
 var _bubble_label: Label
+var last_direction: String = "front"
 
 func _ready() -> void:
 	add_to_group("player")
@@ -62,12 +63,20 @@ func get_input_direction() -> Vector2:
 	var input_vector = Vector2.ZERO
 	if Input.is_action_pressed("walk_up"):
 		input_vector.y -= 1
+		animated_sprite.play("walk_back")
+		last_direction = "back"
 	if Input.is_action_pressed("walk_down"):
 		input_vector.y += 1
+		animated_sprite.play("walk_front")
+		last_direction = "front"
 	if Input.is_action_pressed("walk_left"):
 		input_vector.x -= 1
+		animated_sprite.play("walk_left")
+		last_direction = "left"
 	if Input.is_action_pressed("walk_right"):
 		input_vector.x += 1
+		animated_sprite.play("walk_right")
+		last_direction = "right"
 	return input_vector.normalized()
 
 func move_character(delta:float) -> void:
@@ -75,6 +84,16 @@ func move_character(delta:float) -> void:
 	if input_direction != Vector2.ZERO:
 		velocity = velocity.lerp(input_direction * speed, acceleration * delta)
 	else:
+		match last_direction:
+			"right":
+				animated_sprite.play("idle_right")
+			"left":
+				animated_sprite.play("idle_left")
+			"front":
+				animated_sprite.play("idle_front")
+			"back":
+				animated_sprite.play("idle_back")
+
 		velocity = velocity.lerp(Vector2.ZERO, friction * delta)
 		
 	move_and_slide()

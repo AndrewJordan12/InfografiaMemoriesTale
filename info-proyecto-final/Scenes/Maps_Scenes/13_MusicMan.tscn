@@ -114,7 +114,4 @@ position = Vector2(44.5, -7.5)
 [node name="Spawnpoint" parent="MinigameTrigger" index="1" unique_id=77442625]
 position = Vector2(248, 15)
 
-[node name="ShaderPixel" parent="." index="7" unique_id=1817975223]
-visible = false
-
 [editable path="MinigameTrigger"]

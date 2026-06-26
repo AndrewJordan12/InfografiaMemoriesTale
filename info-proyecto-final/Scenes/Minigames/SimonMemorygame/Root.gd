@@ -1,10 +1,11 @@
 extends Control
 
-const MAX_LEVEL: int = 4
+const MAX_LEVEL: int = 1
 const FLASH_DURATION: float = 0.5
 const FLASH_GAP: float = 0.3
 const LOSSES_TO_SCREAMER: int = 3
 const LOSSES_TO_FAIL: int = 6
+const RECEIVER_ID: String = "13"
 
 var current_level: int = 1
 var sequence: Array = []
@@ -14,6 +15,7 @@ var can_press: bool = false
 var consecutive_losses: int = 0
 var total_losses: int = 0
 var has_won: bool = false
+var digit: int = -1
 
 @onready var buttons: Array = [
 	$Buttons/Grid/Red,
@@ -40,18 +42,33 @@ var has_won: bool = false
 @onready var btn_no: Button = $FailMenu/Panel/VBox/BtnNo
 
 func _ready() -> void:
+	digit = State.get_digit(RECEIVER_ID)
 	_reset_ui()
 	screamer_image.visible = false
 	screamer_black.visible = false
 	fail_menu.visible = false
 	btn_yes.pressed.connect(_on_yes_pressed)
 	btn_no.pressed.connect(_on_no_pressed)
+	
+	if SceneTransition.minigame_won and digit != -1:
+		_show_won_state()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("esc"):
+		if has_won:
+			_return_to_map(true)
 
 func _reset_ui() -> void:
 	level_label.text = "Nivel: 1 / %d" % MAX_LEVEL
 	score_label.text = "Presiona INICIAR"
 	start_button.disabled = false
 	_hide_all_flashes()
+
+func _show_won_state() -> void:
+	has_won = true
+	start_button.disabled = true
+	level_label.text = "Nivel: COMPLETADO"
+	score_label.text = "COMPLETADO! NUMERO: " + str(digit) + "\nPRESIONA ESC PARA SALIR"
 
 func _hide_all_flashes() -> void:
 	for flash in flash_overlays:
@@ -134,10 +151,10 @@ func _next_level() -> void:
 		_play_sequence()
 	else:
 		has_won = true
-		score_label.text = "Completaste todos los niveles!"
+		SceneTransition.minigame_won = true
 		level_label.text = "Nivel: COMPLETADO"
-		await get_tree().create_timer(2.0).timeout
-		_return_to_map(true)
+		score_label.text = "COMPLETADO! NUMERO: " + str(digit) + "\nPRESIONA ESC PARA SALIR"
+		start_button.disabled = true
 
 func _on_error() -> void:
 	can_press = false

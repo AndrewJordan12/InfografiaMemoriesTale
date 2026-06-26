@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ckt5ct5jnxc1l"]
+
+[ext_resource type="Script" uid="uid://gtxap4vacrfe" path="res://Scripts/Maps_Scripts/minigame_trigger.gd" id="1_01un8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qukt"]
+size = Vector2(348, 100)
+
+[node name="MinigameTrigger" type="Area2D" unique_id=505678442]
+script = ExtResource("1_01un8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1408847706]
+shape = SubResource("RectangleShape2D_0qukt")
+
+[node name="Spawnpoint" type="Marker2D" parent="." unique_id=77442625]
+position = Vector2(150, 0)

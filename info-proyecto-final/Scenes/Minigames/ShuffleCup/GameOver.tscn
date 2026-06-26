@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dydn6bx4dku24" path="res://Scripts/Minigames/ShuffleCup/game_over.gd" id="1_s6m7x"]
 [ext_resource type="LabelSettings" uid="uid://c750xkdi7gyql" path="res://Theme/Code.tres" id="2_5l50l"]
-[ext_resource type="Texture2D" uid="uid://cy5mpp8rx160" path="res://CollisionMaps/CollisionMap1.png" id="3_5l50l"]
 
 [node name="GameOver" type="Node2D" unique_id=1490350559]
 script = ExtResource("1_s6m7x")
@@ -10,9 +9,9 @@ script = ExtResource("1_s6m7x")
 [node name="PopUp" type="VBoxContainer" parent="." unique_id=2065389466]
 custom_minimum_size = Vector2(800, 0)
 offset_left = 200.0
-offset_top = 200.0
+offset_top = 300.0
 offset_right = 1000.0
-offset_bottom = 479.0
+offset_bottom = 629.0
 
 [node name="Label" type="Label" parent="PopUp" unique_id=1164613907]
 layout_mode = 2
@@ -26,21 +25,8 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 10
 text = "TRY AGAIN"
 flat = true
 
-[node name="X" type="Button" parent="." unique_id=108302790]
-offset_left = 164.0
-offset_top = 224.0
-offset_right = 318.0
-offset_bottom = 368.0
-scale = Vector2(0.6000001, 0.56)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-icon = ExtResource("3_5l50l")
-flat = true
-expand_icon = true
-
 [connection signal="pressed" from="PopUp/Retry" to="." method="_on_retry_pressed"]
-[connection signal="pressed" from="X" to="." method="_on_x_pressed"]

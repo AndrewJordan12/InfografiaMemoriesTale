@@ -1,17 +1,13 @@
 extends BaseMap
 
-@onready var minigame = $ShuffleCup
+class_name S14
+
 func _ready() -> void:
 	super._ready()
-	
 
-func _on_shuffle_cup_puzzle_ended(won: bool) -> void:
-	if won == true:
-		minigame.on_win(digit)
+func get_digit() -> int:
+	return digit
 
-func start_puzzle():
-	minigame.visible = true
-	minigame.start()
+func return_to_scene():
+	pass
 	
-func _on_shuffle_cup_close() -> void:
-	minigame.visible = false

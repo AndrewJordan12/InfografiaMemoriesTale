@@ -1,13 +1,16 @@
 extends Node
 
 var available_ids = [
-	"3","4",
+	#"3","4",
 	#"5","6","7",
-	"8","9","10","11","12","13","14"
+	#"8",
+	"9",
+	#"10","11","12",
+	"13","14"
 ]
 
 var assigned_ids := {}
-var code_length := 4
+var code_length := 3
 var secret_code: Array[int] = []
 var max_retries: int = 3
 var retries : int = 0

@@ -26,10 +26,6 @@ func lower_cup():
 	tween.tween_property(self,"position:y",start_position.y,raise_duration)
 	await tween.finished
 
-func reveal_ball(time := 1.5):
-	await raise_cup()
-	await get_tree().create_timer(time).timeout
-	await lower_cup()
 
 func swap_with(other: Button):
 	var my_pos = position

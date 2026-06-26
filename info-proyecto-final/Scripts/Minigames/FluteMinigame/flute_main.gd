@@ -9,11 +9,9 @@ extends CanvasLayer
 @onready var instructions_label : Label = $Instructions 
 
 var loop_metronome = false
-var track_manager = TrackManager.new()
 var current_track_name: String = "0"  
 
 var beat : int = 0
-var partiture = []
 var beat_current_notes = []
 var preview_active: bool = false
 var preview_played: bool = false 
@@ -22,8 +20,8 @@ var countdown_active : bool = false
 func _ready() -> void:
 	metronome_timer.beat_tick.connect(_on_beat_tick)
 	countdown_timer.timeout.connect(_on_countdown_tick)
-	load_track(current_track_name)
-	grid.setup_preview_manager(track_manager)
+	grid.setup_preview_manager()
+	grid.track_manager.load_track("0") #Hardcoded as it was only planned for the 3 tracks. shouldn't be hard to implement a system long work
 	
 func _process(_delta: float) -> void:
 	##if(State.fluteState.PLAYING):
@@ -38,7 +36,6 @@ func _process(_delta: float) -> void:
 				close_overlay()
 		if State.flute_current_state == State.fluteState.PLAYING and get_input() != null:
 			store_note(get_input())
-	#grid.draw_partiture(partiture)
 
 func _on_beat_tick():
 	
@@ -147,16 +144,11 @@ func close_overlay():
 
 #region track
 
-func load_track(new_track: String):
-	current_track_name = new_track
-	if not track_manager.load_track(current_track_name):
-		print("Failed to load track: ", current_track_name)
-	
 # Win condition
 func check_win_condition():
 	var grid_notes = grid.get_all_notes() 
 	
-	if track_manager.compare_track(grid_notes):
+	if grid.track_manager.compare_track(grid_notes):
 		on_win()
 	else:
 		on_lose()
@@ -165,11 +157,13 @@ func on_win():
 	stop_playing()
 	countdown_label.visible = false
 	if current_track_name == "0":
-		load_track("1")
+		grid.track_manager.load_track("1")
+		current_track_name= "1"
 		preview_played = false
 		return
 	if current_track_name == "1":
-		load_track("2")
+		grid.track_manager.load_track("2")
+		current_track_name= "2"
 		preview_played = false
 		return
 	if current_track_name == "2":
@@ -199,24 +193,16 @@ func start_track_sequence():
 	if preview_played:
 		reset_and_restart()	
 	else:
-		start_preview()
-
-func start_preview():
-	if track_manager.current_track.is_empty():
-		print("No track to preview")
-		return
-	instructions_label.text = "PREVIEW"
-	State.flute_current_state = State.fluteState.PREVIEW
-	
-	preview_active = true
-	beat = 0
-	grid.update_beat_highlight(-1)
-	
-	# Start preview with callback
-	if grid.start_preview(Callable(self, "_on_preview_complete")):
-		countdown_label.visible = true
-		countdown_label.text = "3"
-		countdown_timer.start()
+		instructions_label.text = "PREVIEW"
+		State.flute_current_state = State.fluteState.PREVIEW
+		
+		preview_active = true
+		beat = 0
+		grid.update_beat_highlight(-1)
+		if grid.preview_manager.start_preview(Callable(self, "_on_preview_complete")):
+			countdown_label.visible = true
+			countdown_label.text = "3"
+			countdown_timer.start()
 
 func _on_preview_complete():
 	# Preview finished, now start gameplay countdown
@@ -224,7 +210,7 @@ func _on_preview_complete():
 	toggle_metronome()
 	State.flute_current_state = State.fluteState.IDLE
 	preview_active = false
-	grid.stop_preview()
+	grid.preview_manager.stop_preview()
 	countdown_label.visible = false
 	preview_played = true
 	

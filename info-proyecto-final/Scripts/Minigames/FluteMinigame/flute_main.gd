@@ -16,6 +16,7 @@ var beat : int = 0
 var partiture = []
 var beat_current_notes = []
 var preview_active: bool = false
+var countdown_active : bool = false
 
 func _ready() -> void:
 	metronome_timer.beat_tick.connect(_on_beat_tick)
@@ -27,12 +28,14 @@ func _process(_delta: float) -> void:
 	##if(State.fluteState.PLAYING):
 	if State.flute_current_state == State.fluteState.WIN:
 		on_completed_minigame()
-	if State.flute_current_state == State.fluteState.IDLE and Input.is_action_just_pressed("interact"):
-		reset_and_restart()
+	if Input.is_action_just_pressed("interact"):
+		if (State.flute_current_state == State.fluteState.IDLE and State.player != State.player_state.WALKING and !countdown_active):
+			reset_and_restart()
 	if Input.is_action_just_pressed("esc"):
-		close_overlay()
+		if (State.flute_current_state != State.fluteState.PLAYING):
+			close_overlay()
 	
-	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null:
+	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null and !countdown_active:
 		store_note(get_input())
 	#grid.draw_partiture(partiture)
 
@@ -89,9 +92,9 @@ func get_input():
 #region start/stop countdown handler
 func start_playing():
 	State.flute_current_state = State.fluteState.PLAYING
+	countdown_active = false
 	toggle_metronome()
 	grid.update_beat_highlight(beat)
-	print("Playing started!")
 
 func stop_playing():
 	State.flute_current_state = State.fluteState.IDLE
@@ -100,11 +103,10 @@ func stop_playing():
 	countdown_label.visible = false
 	instructions_label.visible = true
 	instructions_label.text = "PRESS SPACE TO CONTINUE (" + str(int(current_track_name)+1) + "/3)"
-	print("Playing stopped")
 
 func start_countdown():
-	print("clik")
 	grid.set_show_future_notes(true)
+	countdown_active = true
 	instructions_label.visible = false
 	countdown_label.visible = true
 	countdown_label.text = "3"
@@ -130,7 +132,16 @@ func _on_countdown_tick():
 
 func close_overlay():
 	if State.flute_current_state != State.fluteState.PLAYING || State.flute_current_state != State.fluteState.PREVIEW:
-		queue_free()
+		if State.player != State.player_state.WALKING:
+			var parent = get_parent()
+			if parent:
+				var trigger = parent.get_node_or_null("MinigameTrigger")
+				print(trigger)
+				print(trigger.name)
+				print(trigger.trigger_name)
+				if trigger and trigger.trigger_name == name:
+					trigger.hide_overlay()
+			State.player = State.player_state.WALKING
 #endregion
 
 #region track

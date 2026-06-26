@@ -21,10 +21,7 @@ func _process(delta: float) -> void:
 		if _bubble_timer <= 0.0:
 			_waiting = false
 			SceneTransition.return_spawn_marker = "Spawnpoint"
-			if is_overlay:
-				show_minigame_overlay(target_scene)
-			else:
-				SceneTransition.goto_minigame(target_scene, get_tree().current_scene.scene_file_path, trigger_name)
+			SceneTransition.goto_minigame(target_scene, get_tree().current_scene.scene_file_path, trigger_name)
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and not _triggered:
 		_player = body
@@ -40,8 +37,3 @@ func disable_trigger() -> void:
 	if collision:
 		collision.set_deferred("disabled", true)
 	monitorable = false
-
-func show_minigame_overlay(target_scene):
-	var overlay_minigame_scene = load(target_scene)
-	var overlay_minigame = overlay_minigame_scene.instantiate()
-	add_child(overlay_minigame)

@@ -46,7 +46,7 @@ sources/0 = SubResource("TileSetAtlasSource_ojlq4")
 shader = ExtResource("2_38j7n")
 shader_parameter/tamano_pixel = 5.250000201875
 
-[node name="MapTexture" type="Node2D" unique_id=1652564462]
+[node name="MapTexture2" type="Node2D" unique_id=1652564462]
 script = ExtResource("1_e4yc5")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=609675861]

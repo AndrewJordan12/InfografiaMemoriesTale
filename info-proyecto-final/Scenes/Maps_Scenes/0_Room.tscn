@@ -21,8 +21,8 @@ script = ExtResource("2_vde64")
 receiver_id = "0"
 floor_bottom_limit = 881
 floor_upper_limit = 671
-min_scale = 0.2
-max_scale = 0.3
+min_scale = 0.4
+max_scale = 0.6
 metadata/_edit_horizontal_guides_ = [-13.0]
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]

@@ -28,15 +28,15 @@ func _process(_delta: float) -> void:
 	##if(State.fluteState.PLAYING):
 	if State.flute_current_state == State.fluteState.WIN:
 		on_completed_minigame()
-	if Input.is_action_just_pressed("interact"):
-		if (State.flute_current_state == State.fluteState.IDLE and State.player != State.player_state.WALKING and !countdown_active):
-			reset_and_restart()
-	if Input.is_action_just_pressed("esc"):
-		if (State.flute_current_state != State.fluteState.PLAYING):
-			close_overlay()
-	
-	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null and !countdown_active:
-		store_note(get_input())
+	if !countdown_active:
+		if Input.is_action_just_pressed("interact"):
+			if (State.flute_current_state == State.fluteState.IDLE and State.player != State.player_state.WALKING):
+				reset_and_restart()
+		if Input.is_action_just_pressed("esc"):
+			if (State.flute_current_state != State.fluteState.PLAYING):
+				close_overlay()
+		if State.flute_current_state == State.fluteState.PLAYING and get_input() != null:
+			store_note(get_input())
 	#grid.draw_partiture(partiture)
 
 func _on_beat_tick():

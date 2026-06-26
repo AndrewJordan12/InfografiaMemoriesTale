@@ -110,7 +110,7 @@ func show_note_at_position(note_type: Note.type, position_index: int, animate: b
 		var note_node = row.get_child(position_index)
 		if note_node is Note:
 			if animate:
-				note_node.show_note_animated(note_node)
+				note_node.show_note_animated()
 			else:
 				note_node.modulate.a = 1.0		
 

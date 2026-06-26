@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 [ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
+[ext_resource type="PackedScene" uid="uid://ckt5ct5jnxc1l" path="res://Scenes/TransitionZone/MinigameTrigger.tscn" id="6_upv0o"]
 
 [sub_resource type="RectangleShape2D" id="ShapeTop"]
 size = Vector2(125, 15)
@@ -27,7 +28,8 @@ size = Vector2(104, 269)
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_24xb2")]
 receiver_id = "13"
 floor_upper_limit = 145
-max_scale = 1.0
+min_scale = 0.3
+max_scale = 0.8
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_c544a")
@@ -97,3 +99,17 @@ shape = SubResource("ShowNextAreaNameShape2")
 
 [node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=615954597]
 position = Vector2(-76, 135)
+
+[node name="MinigameTrigger" parent="." index="6" unique_id=505678442 instance=ExtResource("6_upv0o")]
+position = Vector2(465, 444)
+target_scene = "res://Scenes/Minigames/FluteMinigame/FluteMinigame.tscn"
+trigger_name = "MinigameTrigger"
+is_overlay = true
+
+[node name="CollisionShape2D" parent="MinigameTrigger" index="0" unique_id=1408847706]
+position = Vector2(44.5, -7.5)
+
+[node name="Spawnpoint" parent="MinigameTrigger" index="1" unique_id=77442625]
+position = Vector2(248, 15)
+
+[editable path="MinigameTrigger"]

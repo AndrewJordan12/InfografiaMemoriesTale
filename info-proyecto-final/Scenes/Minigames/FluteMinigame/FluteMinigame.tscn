@@ -194,10 +194,23 @@ bpm = 100.0
 [node name="Countdown_Timer" type="Timer" parent="." unique_id=1446506421]
 
 [node name="Countdown" type="Label" parent="." unique_id=1088370608]
-visible = false
 offset_left = 28.0
 offset_top = 516.0
 offset_right = 118.0
 offset_bottom = 730.0
 theme_override_font_sizes/font_size = 157
 text = "0"
+
+[node name="Instructions" type="Label" parent="." unique_id=309221752]
+modulate = Color(1, 1, 1, 0.60784316)
+z_index = 3
+offset_left = 148.0
+offset_top = 500.0
+offset_right = 957.0
+offset_bottom = 797.0
+theme_override_font_sizes/font_size = 71
+text = "PRESS SPACE TO START
+PRESS ESC TO EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

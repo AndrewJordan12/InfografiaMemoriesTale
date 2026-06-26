@@ -8,6 +8,7 @@ var file_path = "res://Scripts/Minigames/FluteMinigame/Tracks/"
 
 # Load a track from a JSON file
 func load_track(track_name: String) -> bool:
+	file_path = "res://Scripts/Minigames/FluteMinigame/Tracks/"
 	file_path += track_name + ".json"
 	
 	if not FileAccess.file_exists(file_path):

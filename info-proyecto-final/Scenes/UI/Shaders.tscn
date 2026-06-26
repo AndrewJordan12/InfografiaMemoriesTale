@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://b3g6gjmbjqfup"]
+
+[ext_resource type="Shader" uid="uid://bw7rmginuja6c" path="res://Shaders/Keypad.gdshader" id="1_4051q"]
+[ext_resource type="Shader" uid="uid://cn52a15unsem5" path="res://Shaders/key.gdshader" id="2_3isho"]
+[ext_resource type="Shader" uid="uid://uuf8wjywwyr2" path="res://Shaders/keypadScreen.gdshader" id="3_7mml6"]
+[ext_resource type="Texture2D" uid="uid://b5gyn633srytx" path="res://Assets/b1.jpg" id="4_xjj52"]
+[ext_resource type="Shader" uid="uid://c2burd15r2vpw" path="res://Shaders/pixel.gdshader" id="5_4nbbf"]
+[ext_resource type="Shader" uid="uid://cmjtjejbyra2h" path="res://Shaders/FluteMinigame_CurrentNote.gdshader" id="6_qt131"]
+[ext_resource type="Shader" uid="uid://4dwjqhws1irn" path="res://Scenes/Minigames/SimonMemorygame/grain_shader.gdshader" id="7_y1gwq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prt3x"]
+shader = ExtResource("1_4051q")
+shader_parameter/speed = 2.0
+shader_parameter/glitch_strength = 0.4
+shader_parameter/noise_strength = 0.0
+shader_parameter/scanline_strength = 0.25
+shader_parameter/brightness = 0.45
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlpaa"]
+shader = ExtResource("2_3isho")
+shader_parameter/key_color = Color(0.15, 0.2, 0.25, 1)
+shader_parameter/key_hover_color = Color(0.35, 0.45, 0.55, 1)
+shader_parameter/key_press_color = Color(0.1, 0.15, 0.2, 1)
+shader_parameter/corner_radius = 0.15
+shader_parameter/shadow_intensity = 0.4
+shader_parameter/is_pressed = false
+shader_parameter/is_hovered = false
+shader_parameter/is_active = false
+shader_parameter/press_animation = 0.0
+shader_parameter/glow_intensity = 0.2
+shader_parameter/smooth_edges = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds0dq"]
+shader = ExtResource("3_7mml6")
+shader_parameter/screen_color = Color(0.1, 0.15, 0.2, 1)
+shader_parameter/border_color = Color(0.3, 0.4, 0.5, 1)
+shader_parameter/display_color = Color(0, 0.8, 0, 1)
+shader_parameter/border_thickness = 0.03
+shader_parameter/curvature = 0.15
+shader_parameter/show_scanlines = true
+shader_parameter/scanline_intensity = 0.15
+shader_parameter/show_grid = true
+shader_parameter/grid_intensity = 0.1
+shader_parameter/glow_intensity = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8vs0q"]
+shader = ExtResource("5_4nbbf")
+shader_parameter/tamano_pixel = 6.1670002454325
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts6qf"]
+shader = ExtResource("6_qt131")
+shader_parameter/fade_height = 0.334000015865
+shader_parameter/fade_curve = 1.8880000864201198
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jc470"]
+shader = ExtResource("7_y1gwq")
+shader_parameter/grain_opacity = 0.802000038095
+shader_parameter/grain_speed = 13.4050006367375
+
+[node name="Shaders" type="Node2D" unique_id=1343140434]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=630109490]
+material = SubResource("ShaderMaterial_prt3x")
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1201032327]
+material = SubResource("ShaderMaterial_xlpaa")
+offset_left = 100.0
+offset_right = 200.0
+offset_bottom = 100.0
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=383759645]
+material = SubResource("ShaderMaterial_ds0dq")
+offset_left = 200.0
+offset_right = 300.0
+offset_bottom = 100.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1790798319]
+custom_minimum_size = Vector2(100, 100)
+offset_top = 100.0
+offset_right = 100.0
+offset_bottom = 200.0
+texture = ExtResource("4_xjj52")
+expand_mode = 1
+
+[node name="ColorRect4" type="ColorRect" parent="TextureRect" unique_id=420057256]
+material = SubResource("ShaderMaterial_8vs0q")
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1923884596]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("4_xjj52")
+expand_mode = 1
+
+[node name="ColorRect5" type="ColorRect" parent="TextureRect2" unique_id=1006000329]
+material = SubResource("ShaderMaterial_ts6qf")
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=634534323]
+custom_minimum_size = Vector2(100, 100)
+offset_left = 200.0
+offset_top = 100.0
+offset_right = 300.0
+offset_bottom = 200.0
+texture = ExtResource("4_xjj52")
+expand_mode = 1
+
+[node name="ColorRect6" type="ColorRect" parent="TextureRect3" unique_id=1879647873]
+material = SubResource("ShaderMaterial_jc470")
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0

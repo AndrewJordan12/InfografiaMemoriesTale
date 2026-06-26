@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 [ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
-[ext_resource type="PackedScene" uid="uid://dfiwm1eo4628e" path="res://Scenes/Minigame/ShuffleCup.tscn" id="7_lnfer"]
+[ext_resource type="PackedScene" uid="uid://ckt5ct5jnxc1l" path="res://Scenes/TransitionZone/MinigameTrigger.tscn" id="8_p5ef8"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeft"]
 size = Vector2(16, 279)
@@ -28,6 +28,7 @@ size = Vector2(638, 88)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_cgvwi")]
 script = ExtResource("2_vf7sy")
+receiver_id = "14"
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_0qtes")
@@ -99,8 +100,15 @@ shape = SubResource("ShowNextAreaNameShape2")
 [node name="Spawnpoint" type="Marker2D" parent="BottomRightTrigger" index="2" unique_id=416560166]
 position = Vector2(94, 111)
 
-[node name="ShuffleCup" parent="." index="6" unique_id=712689087 instance=ExtResource("7_lnfer")]
-visible = false
-z_index = 100
+[node name="MinigameTrigger" parent="." index="6" unique_id=505678442 instance=ExtResource("8_p5ef8")]
+position = Vector2(878, 551)
+target_scene = "res://Scenes/Minigames/ShuffleCup/ShuffleCup.tscn"
+trigger_name = "MinigameTrigger"
 
-[connection signal="puzzle_ended" from="ShuffleCup" to="." method="_on_shuffle_cup_puzzle_ended"]
+[node name="CollisionShape2D" parent="MinigameTrigger" index="0" unique_id=1408847706]
+position = Vector2(124, 0)
+
+[node name="Spawnpoint" parent="MinigameTrigger" index="1" unique_id=77442625]
+position = Vector2(-257, 55)
+
+[editable path="MinigameTrigger"]

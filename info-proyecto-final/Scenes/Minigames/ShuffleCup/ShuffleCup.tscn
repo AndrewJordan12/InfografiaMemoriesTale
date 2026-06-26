@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3e7wheeh1yp0" path="res://Scripts/Minigames/ShuffleCup/shuffle_cup.gd" id="1_7jna0"]
 [ext_resource type="Shader" uid="uid://bw7rmginuja6c" path="res://Shaders/Keypad.gdshader" id="2_xpof3"]
 [ext_resource type="LabelSettings" uid="uid://b6xs1v51rv1xa" path="res://Theme/CupScore.tres" id="4_be560"]
-[ext_resource type="PackedScene" uid="uid://dsc5wtp3whhp1" path="res://Scenes/Minigame/GameOver.tscn" id="4_lai3x"]
+[ext_resource type="PackedScene" uid="uid://dsc5wtp3whhp1" path="res://Scenes/Minigames/ShuffleCup/GameOver.tscn" id="4_lai3x"]
 [ext_resource type="Texture2D" uid="uid://c8ukcpjmhku56" path="res://Assets/ShuffleCup/ball.png" id="5_xpof3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gh5ow"]

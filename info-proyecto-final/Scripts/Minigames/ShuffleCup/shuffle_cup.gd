@@ -1,12 +1,8 @@
 extends Node2D
 
-signal puzzle_ended(won:bool)
-
-@export var reward_digit := 0
-
 @onready var gameover = $GameOver
 @onready var cups_parent = $PanelContainer/Cups
-@onready var cup_scene = preload("res://Scenes/Minigame/Cup.tscn")
+@onready var cup_scene = preload("res://Scenes/Minigames/ShuffleCup/Cup.tscn")
 @onready var score_label = $Score
 @onready var attempts_label = $Attempts
 @onready var ball = $Ball
@@ -37,8 +33,7 @@ const LEVELS = {
 }
 
 func _ready():
-	pass
-	#await start()
+	await start()
 
 func start():
 	await create_cups()
@@ -126,7 +121,6 @@ func swap_cups(a:int, b:int):
 	update_ball_position()
 
 func _on_cup_selected(cup):
-	print("CLICKED", cup)
 	if !accepting_input:
 		return
 	accepting_input = false
@@ -144,7 +138,8 @@ func handle_win():
 		await start_level(current_level + 1)
 		score_label.text = "Level:"+ str(current_level) + "/" + str(max_level)
 	else:
-		puzzle_ended.emit(true)
+		gameover.set_state(true, 1)
+		on_puzzle_ended()
 
 func handle_fail():
 	attempts -= 1
@@ -152,20 +147,32 @@ func handle_fail():
 	ball.visible = true
 	await visible_cups[ball_index].raise_cup()
 	if attempts <= 0:
-		gameover.set_state(false, false)
-		puzzle_ended.emit(false)
+		gameover.set_state(false, 0)
+		on_puzzle_ended()
 	else:
 		retry()
 
+func on_puzzle_ended():
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = 2
+	add_child(timer)
+	timer.start()
+	timer.timeout.connect(
+		func(): 
+			visible = false
+			SceneTransition.return_spawn_marker = "Spawnpoint"
+			SceneTransition.goto_minigame("res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn", get_tree().current_scene.scene_file_path, "MinigameTrigger")
+			)
+
 func retry():
-	attempts = max_attempts
 	await start_level(current_level)
 
 func on_win(digit:int):
 	gameover.set_state(true, digit)
 
 func _on_game_over_on_retry() -> void:
+	attempts = max_attempts
 	await  start_level(1)
 
-func _on_game_over_on_x() -> void:
-	visible = false
+	

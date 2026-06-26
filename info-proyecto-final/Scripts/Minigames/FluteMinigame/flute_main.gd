@@ -16,6 +16,7 @@ var beat : int = 0
 var partiture = []
 var beat_current_notes = []
 var preview_active: bool = false
+var preview_played: bool = false 
 var countdown_active : bool = false
 
 func _ready() -> void:
@@ -31,7 +32,7 @@ func _process(_delta: float) -> void:
 	if !countdown_active:
 		if Input.is_action_just_pressed("interact"):
 			if (State.flute_current_state == State.fluteState.IDLE and State.player != State.player_state.WALKING):
-				reset_and_restart()
+				start_track_sequence()
 		if Input.is_action_just_pressed("esc"):
 			if (State.flute_current_state != State.fluteState.PLAYING):
 				close_overlay()
@@ -121,11 +122,11 @@ func _on_countdown_tick():
 	else:
 		countdown_timer.stop()
 		countdown_label.visible = false
-		
-		if State.flute_current_state == State.fluteState.PREVIEW:
-			start_preview_playing()
+		if preview_played:
+			start_playing()
 		else:
 			start_playing()
+			State.flute_current_state = State.fluteState.PREVIEW
 #endregion
 
 #region UI controls
@@ -165,9 +166,11 @@ func on_win():
 	countdown_label.visible = false
 	if current_track_name == "0":
 		load_track("1")
+		preview_played = false
 		return
 	if current_track_name == "1":
 		load_track("2")
+		preview_played = false
 		return
 	if current_track_name == "2":
 		on_completed_minigame()
@@ -179,25 +182,32 @@ func on_completed_minigame():
 		
 func on_lose():
 	stop_playing()
+	clear_notes_and_labels()
 	instructions_label.text = "PRESS SPACE TO RETRY (" + str(int(current_track_name)+1) + "/3) \n PRESS ESC TO EXIT"
 
 func reset_and_restart():
 	beat = 0
-	grid.clear_all_notes()
-	grid.update_beat_highlight(-1)
-	beat_current_notes = []
-	countdown_label.visible = false
+	clear_notes_and_labels()
 	start_countdown()
 	
 #endregion
 
 #region preview
+func start_track_sequence():
+	beat = 0
+	clear_notes_and_labels()
+	if preview_played:
+		reset_and_restart()	
+	else:
+		start_preview()
+
 func start_preview():
 	if track_manager.current_track.is_empty():
 		print("No track to preview")
 		return
-	
+	instructions_label.text = "PREVIEW"
 	State.flute_current_state = State.fluteState.PREVIEW
+	
 	preview_active = true
 	beat = 0
 	grid.update_beat_highlight(-1)
@@ -209,17 +219,17 @@ func start_preview():
 		countdown_timer.start()
 
 func _on_preview_complete():
-	# Returns to IDLE afterpreview
+	# Preview finished, now start gameplay countdown
 	grid.update_beat_highlight(-1)
 	toggle_metronome()
 	State.flute_current_state = State.fluteState.IDLE
 	preview_active = false
 	grid.stop_preview()
 	countdown_label.visible = false
+	preview_played = true
+	
+	start_countdown()
 
-func start_preview_playing():
-	toggle_metronome()
-	beat = 0
 #endregion
 
 #region helper functions
@@ -241,4 +251,11 @@ func _print_player_notes():
 	print("=== Player Notes ===\n")
 	print(json_string)
 	print("\n=== End of Player Notes ===")
+	
+func clear_notes_and_labels():
+	grid.clear_all_notes()
+	grid.update_beat_highlight(-1)
+	beat_current_notes = []
+	countdown_label.visible = false
+	grid.set_show_future_notes(false)
 #endregion

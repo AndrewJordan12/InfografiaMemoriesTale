@@ -8,6 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://cy21r8oxywdtc" path="res://Assets/Sounds/Flute_3_retro.wav" id="5_rw622"]
 [ext_resource type="AudioStream" uid="uid://n6ms6d4k7j3i" path="res://Assets/Sounds/Flute_4_retro.wav" id="6_hhrx1"]
 [ext_resource type="AudioStream" uid="uid://b24rwh8it26ei" path="res://Assets/Sounds/Flute_5_retro.wav" id="7_v72tj"]
+[ext_resource type="AudioStream" uid="uid://dcu3xfpdeqk7f" path="res://Assets/Sounds/Coco_Part1.wav" id="8_hhrx1"]
+[ext_resource type="AudioStream" uid="uid://dgp4tspi4pulk" path="res://Assets/Sounds/Coco_Part2.wav" id="9_v72tj"]
+[ext_resource type="AudioStream" uid="uid://bt2hxbh455veq" path="res://Assets/Sounds/Coco_Part3.wav" id="10_mctoy"]
 
 [node name="AudioManager" type="Node" unique_id=432198332]
 script = ExtResource("1_u6owb")
@@ -19,12 +22,12 @@ stream = ExtResource("1_dygvs")
 volume_db = -15.0
 pitch_scale = 0.9
 
-[node name="LEFT" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1385607769]
+[node name="SPACE" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1385607769]
 stream = ExtResource("3_va48u")
 volume_db = -15.0
 pitch_scale = 0.9
 
-[node name="UP" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=351786158]
+[node name="DOWN" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=351786158]
 stream = ExtResource("4_xb6i0")
 volume_db = -15.0
 pitch_scale = 0.9
@@ -34,15 +37,24 @@ stream = ExtResource("5_rw622")
 volume_db = -15.0
 pitch_scale = 0.9
 
-[node name="DOWN" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1448673374]
+[node name="UP" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1448673374]
 stream = ExtResource("6_hhrx1")
 volume_db = -15.0
 pitch_scale = 0.9
 
-[node name="SPACE" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1371790753]
+[node name="LEFT" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1371790753]
 stream = ExtResource("7_v72tj")
 volume_db = -15.0
 pitch_scale = 0.9
+
+[node name="preview_0" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1298888854]
+stream = ExtResource("8_hhrx1")
+
+[node name="preview_1" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=760804074]
+stream = ExtResource("9_v72tj")
+
+[node name="preview_2" type="AudioStreamPlayer" parent="FluteMinigame" unique_id=1027191474]
+stream = ExtResource("10_mctoy")
 
 [node name="Soundtrack" type="Node" parent="." unique_id=369372140]
 

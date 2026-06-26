@@ -189,7 +189,7 @@ layout_mode = 2
 
 [node name="Metronome_Timer" type="Timer" parent="." unique_id=677076743]
 script = ExtResource("7_do3ap")
-bpm = 100.0
+bpm = 126.0
 
 [node name="Countdown_Timer" type="Timer" parent="." unique_id=1446506421]
 

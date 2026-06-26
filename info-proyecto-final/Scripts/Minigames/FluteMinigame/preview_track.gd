@@ -4,7 +4,7 @@ class_name PreviewManager
 # Reference to grid for visual updates
 var grid: Control
 var track_manager: TrackManager
-var total_beats: int = 11
+var total_beats: int 
 var current_beat: int = 0
 var is_previewing: bool = false
 var preview_complete_callback: Callable

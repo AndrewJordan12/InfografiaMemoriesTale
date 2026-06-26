@@ -9,7 +9,7 @@ var note_references: Dictionary = {}
 var last_updated_beat: int = -1
 
 var preview_manager: PreviewManager
-var track_manager_ref: TrackManager 
+var track_manager: TrackManager 
 var show_future_notes: bool = false 
 var future_notes_drawn: bool = false
 
@@ -132,10 +132,10 @@ func hide_all_notes():
 				
 #Draws future notes in the track
 func draw_future_notes():
-	if future_notes_drawn or track_manager_ref == null:
+	if future_notes_drawn or track_manager == null:
 		return
 	
-	var track_notes = track_manager_ref.current_track
+	var track_notes = track_manager.current_track
 	
 	for beat in track_notes:
 		for row_index in track_notes[beat]:
@@ -152,10 +152,10 @@ func draw_future_notes():
 
 # Hide future notes
 func hide_future_notes():
-	if track_manager_ref == null:
+	if track_manager == null:
 		return
 	
-	var track_notes = track_manager_ref.current_track
+	var track_notes = track_manager.current_track
 	
 	for beat in track_notes:
 		for row_index in track_notes[beat]:
@@ -197,8 +197,8 @@ func update_beat_highlight(beat: int):
 #endregion
 
 #region preview
-func setup_preview_manager(track_manager: TrackManager):
-	track_manager_ref = track_manager
+func setup_preview_manager():
+	track_manager = TrackManager.new()
 	preview_manager.initialize(self, track_manager, columns)
 	add_child(preview_manager)
 	
@@ -214,9 +214,6 @@ func preview_beat_tick(beat: int):
 func is_preview_running() -> bool:
 	return preview_manager and preview_manager.is_running()
 
-func stop_preview():
-	if preview_manager:
-		preview_manager.stop_preview()
 #endregion
 
 #region helper methods
@@ -270,13 +267,12 @@ func get_notes_as_json() -> String:
 # Add this function to get all grid notes in the correct format
 func get_all_notes() -> Dictionary:
 	return note_references.duplicate(true)
-	
-	
+		
 func is_future_note(beat: int, row_index: int) -> bool:
-	if track_manager_ref == null:
+	if track_manager == null:
 		return false
 	
-	var track_notes = track_manager_ref.current_track
+	var track_notes = track_manager.current_track
 	if not track_notes.has(beat):
 		return false
 	

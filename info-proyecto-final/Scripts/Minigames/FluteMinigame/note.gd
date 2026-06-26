@@ -10,7 +10,6 @@ class_name Note
 enum type {LEFT, RIGHT, UP, DOWN, SPACE}
 
 var note_type: type = type.LEFT #default
-var fresh: bool = false
 
 func _ready() -> void:
 	set_note_value()

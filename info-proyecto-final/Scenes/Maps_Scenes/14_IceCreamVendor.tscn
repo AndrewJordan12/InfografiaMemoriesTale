@@ -29,6 +29,10 @@ size = Vector2(638, 88)
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_cgvwi")]
 script = ExtResource("2_vf7sy")
 receiver_id = "14"
+floor_bottom_limit = 850
+floor_upper_limit = 570
+min_scale = 0.4
+max_scale = 0.7
 
 [node name="MapTexture" parent="Background" parent_id_path=PackedInt32Array(609675861) index="0" unique_id=1535307837]
 texture = ExtResource("2_0qtes")

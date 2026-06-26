@@ -1,0 +1,200 @@
+[gd_scene format=3 uid="uid://wejaekerj16t"]
+
+[ext_resource type="Script" uid="uid://3peohy0liala" path="res://Scripts/UI/keypad.gd" id="1_tsxvi"]
+[ext_resource type="Shader" uid="uid://uuf8wjywwyr2" path="res://Shaders/keypadScreen.gdshader" id="2_k3esd"]
+[ext_resource type="PackedScene" uid="uid://d3it5qqw415ra" path="res://Scenes/UI/Key.tscn" id="3_pmtet"]
+[ext_resource type="LabelSettings" uid="uid://c750xkdi7gyql" path="res://Theme/Code.tres" id="3_qlpxs"]
+[ext_resource type="Shader" uid="uid://bw7rmginuja6c" path="res://Shaders/Keypad.gdshader" id="3_xyvb2"]
+
+[sub_resource type="Theme" id="Theme_k3esd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyvb2"]
+shader = ExtResource("3_xyvb2")
+shader_parameter/speed = 0.86500003782762
+shader_parameter/glitch_strength = 0.54400002584
+shader_parameter/noise_strength = 0.158000007505
+shader_parameter/scanline_strength = 0.4330000205675
+shader_parameter/brightness = 0.8400000399
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmtet"]
+shader = ExtResource("2_k3esd")
+shader_parameter/screen_color = Color(0.1, 0.15, 0.2, 1)
+shader_parameter/border_color = Color(0.050305516, 0.17339265, 0.15203092, 1)
+shader_parameter/display_color = Color(0.2800955, 0.71768737, 0.87508935, 1)
+shader_parameter/border_thickness = 0.0330000015675
+shader_parameter/curvature = 0.15
+shader_parameter/show_scanlines = true
+shader_parameter/scanline_intensity = 0.1770000084075
+shader_parameter/show_grid = true
+shader_parameter/grid_intensity = 0.1
+shader_parameter/glow_intensity = 0.182000008645
+
+[node name="Keypad" type="Control" unique_id=695362372]
+custom_minimum_size = Vector2(900, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 19.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+size_flags_stretch_ratio = 4.25
+theme = SubResource("Theme_k3esd")
+script = ExtResource("1_tsxvi")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1047743086]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 50.0
+offset_right = 900.0
+offset_bottom = 710.0
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=956714407]
+visibility_layer = 2
+material = SubResource("ShaderMaterial_xyvb2")
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1858733039]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer" unique_id=548480044]
+clip_contents = true
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1132356610]
+material = SubResource("ShaderMaterial_pmtet")
+layout_mode = 2
+
+[node name="AScreen" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer" unique_id=1209307059]
+clip_contents = true
+custom_minimum_size = Vector2(400, 250)
+layout_mode = 2
+size_flags_vertical = 2
+size_flags_stretch_ratio = 2.92
+text = "5789"
+label_settings = ExtResource("3_qlpxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=107279204]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="KeyContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=349477279]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+size_flags_stretch_ratio = 20.0
+mouse_filter = 2
+columns = 3
+
+[node name="Key1" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1583942461 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "1"
+key_value = "1"
+
+[node name="Key2" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=2009683921 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "2"
+key_value = "2"
+
+[node name="Key3" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=86761220 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "3"
+key_value = "3"
+
+[node name="Key4" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=764800396 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "4"
+key_value = "4"
+
+[node name="Key5" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1821776587 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "5"
+key_value = "5"
+
+[node name="Key6" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=205601995 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "6"
+key_value = "6"
+
+[node name="Key7" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1644470433 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "7"
+
+[node name="Key8" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=706205795 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "8"
+key_value = "8"
+
+[node name="Key9" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1686606167 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "9"
+key_value = "9"
+
+[node name="Key0" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=972860994 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "0"
+key_value = "0"
+
+[node name="Key#" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=1701150988 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "#"
+key_value = "#"
+
+[node name="Key*" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer" unique_id=882111766 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+text = "*"
+key_value = "*"
+
+[node name="KeyContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1547170210]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 20.0
+
+[node name="DEL" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=1666217817 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 1
+key_value = "DEL"
+is_num = false
+
+[node name="CLEAR" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=777056808 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 1
+key_value = "CLEAR"
+is_num = false
+
+[node name="ENTER" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=724753695 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 1
+key_value = "ENTER"
+is_num = false
+
+[node name="X" parent="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2" unique_id=413367299 instance=ExtResource("3_pmtet")]
+layout_mode = 2
+size_flags_vertical = 10
+mouse_filter = 1
+text = "X"
+key_value = "X"
+is_num = false
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/DEL" to="." method="_on_del_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/CLEAR" to="." method="_on_clear_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/ENTER" to="." method="_on_enter_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/KeyContainer2/X" to="." method="_on_exit_pressed"]

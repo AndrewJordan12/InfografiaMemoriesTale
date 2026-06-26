@@ -1,0 +1,280 @@
+extends Control
+@onready var note_scene = preload("res://Scenes/Minigames/FluteMinigame/Note.tscn")
+@onready var rows : VBoxContainer = $Rows
+@onready var beat_highlight : HBoxContainer = $CurrentNote
+@onready var beat_highlight_template = $CurrentNote/Highlight_Template
+
+@export var columns = 11 #this is for the highlights, the max and planned amount of actual notes is 11, though not impossible to make it adjustable
+var note_references: Dictionary = {}
+var last_updated_beat: int = -1
+
+var preview_manager: PreviewManager
+var track_manager: TrackManager 
+var show_future_notes: bool = false 
+var future_notes_drawn: bool = false
+
+func _ready() -> void:
+	create_highlights() #creates appropiate amount of highlights
+	update_beat_highlight(-1) #hides all already placed highlights by default
+	create_notes() # #Clears notes in the scene and fills the grid with invisible notes
+	preview_manager = PreviewManager.new()
+
+#region create notes
+#Clears notes in the scene and fills the grid with invisible notes
+func create_notes():
+	clear_existing_notes()
+	note_references.clear()
+	show_future_notes = false
+	future_notes_drawn = false
+	
+	for row_index in range(rows.get_child_count()):
+		var row = rows.get_child(row_index)
+		var note_type = get_note_type_for_row(row_index)
+		
+		for col_index in range(columns):
+			var new_note = create_note_instance(note_type)
+			row.add_child(new_note)
+			new_note.modulate.a = 0.0 
+
+# Clear existing notes from all rows
+func clear_existing_notes():
+	for row_index in range(rows.get_child_count()):
+		var row = rows.get_child(row_index)
+		
+		# Remove all existing Note children
+		for child in row.get_children():
+			if child is Note:
+				row.remove_child(child)
+				child.queue_free()
+
+# Create a new Note instance of a specific type
+func create_note_instance(note_type: Note.type) -> Note:
+	var new_note = note_scene.instantiate()
+	new_note.change_type(note_type)
+	new_note.modulate.a = 1.0
+	return new_note
+
+# Recieves the input of a note and adds it to the note_reference
+func add_beat_notes(beat: int, notes: Array):
+	# Clear and add new notes for this beat
+	if not note_references.has(beat):
+		note_references[beat] = {}
+	
+	for note_type in notes:
+		var row_index = get_row_index_for_note_type(note_type)
+		if row_index != -1:
+			note_references[beat][row_index] = note_type
+	
+	last_updated_beat = beat
+	update_grid_display()
+
+func set_show_future_notes(enabled: bool):
+	if show_future_notes == enabled:
+		return
+	show_future_notes = enabled
+	future_notes_drawn = false  # Reset flag when toggled
+	
+	if enabled:
+		draw_future_notes()
+	else:
+		hide_future_notes()
+
+#endregion
+
+#region draw current grid
+#the function that updated the partiture
+func update_grid_display():
+	if (preview_manager and preview_manager.is_running()):
+		return
+	
+	hide_all_notes() #puts all notes in alpha 0.0
+	
+		# Draw future notes if enabled (they persist)
+	if show_future_notes and not future_notes_drawn:
+		draw_future_notes()
+	
+	for beat_index in note_references:
+		for row_index in note_references[beat_index]:
+			var note_type = note_references[beat_index][row_index]
+			var is_new = (beat_index == last_updated_beat)  # Only animate the just-updated beat
+			show_note_at_position(note_type, beat_index, is_new)
+
+# Show a specific note at a position
+func show_note_at_position(note_type: Note.type, position_index: int, animate: bool = true):
+	var row_index = get_row_index_for_note_type(note_type)
+	if row_index == -1:
+		return
+	
+	var row = rows.get_child(row_index)
+	if position_index < row.get_child_count():
+		var note_node = row.get_child(position_index)
+		if note_node is Note:
+			if animate:
+				note_node.show_note_animated()
+			else:
+				note_node.modulate.a = 1.0		
+
+#clears references and hides all notes
+func clear_all_notes():
+	note_references.clear()
+	hide_all_notes()
+	future_notes_drawn = false
+
+# puts all notes in the partiture to alpha 0
+func hide_all_notes():
+	for row_index in range(rows.get_child_count()):
+		var row = rows.get_child(row_index)
+		for col_index in range(row.get_child_count()):
+			var note = row.get_child(col_index)
+			if note is Note:
+				if not show_future_notes or not is_future_note(col_index, row_index):
+					note.modulate.a = 0.0
+				
+#Draws future notes in the track
+func draw_future_notes():
+	if future_notes_drawn or track_manager == null:
+		return
+	
+	var track_notes = track_manager.current_track
+	
+	for beat in track_notes:
+		for row_index in track_notes[beat]:
+			if beat < columns:
+				var row = rows.get_child(row_index)
+				if beat < row.get_child_count():
+					var note_node = row.get_child(beat)
+					if note_node is Note:
+						# Only show if not already played
+						if not note_references.has(beat) or not note_references[beat].has(row_index):
+							note_node.modulate.a = 0.3
+	
+	future_notes_drawn = true
+
+# Hide future notes
+func hide_future_notes():
+	if track_manager == null:
+		return
+	
+	var track_notes = track_manager.current_track
+	
+	for beat in track_notes:
+		for row_index in track_notes[beat]:
+			if beat < columns:
+				var row = rows.get_child(row_index)
+				if beat < row.get_child_count():
+					var note_node = row.get_child(beat)
+					if note_node is Note:
+						if not note_references.has(beat) or not note_references[beat].has(row_index):
+							note_node.modulate.a = 0.0
+	
+	future_notes_drawn = false
+#endregion
+	
+#region highlight
+func create_highlights():
+	# Clear existing copies (initially present for easier time making/undersatinding scene)
+	for child in beat_highlight.get_children():
+		if child != beat_highlight_template:
+			child.queue_free()
+
+	# Create n-1 copies (since template already exists)
+	for i in range(columns - 1):
+		var copy = beat_highlight_template.duplicate()
+		beat_highlight.add_child(copy)
+
+func update_beat_highlight(beat: int):
+	var rects = beat_highlight.get_children()
+	# Loop through all rects
+	for i in range(rects.size()):
+		var rect = rects[i]
+		rect.modulate.a = 0.0
+	if beat == -1: #for the onready
+		return
+	# Show only the selected one (if index is valid)
+	if beat >= 0 and beat < rects.size():
+		rects[beat].modulate.a = 0.4
+		AudioManager.sfx_fluteminigame("beat_change")
+#endregion
+
+#region preview
+func setup_preview_manager():
+	track_manager = TrackManager.new()
+	preview_manager.initialize(self, track_manager, columns)
+	add_child(preview_manager)
+	
+func start_preview(callback: Callable = Callable()) -> bool:
+	if preview_manager:
+		return preview_manager.start_preview(callback)
+	return false
+
+func preview_beat_tick(beat: int):
+	if preview_manager:
+		preview_manager.on_beat_tick(beat)
+
+func is_preview_running() -> bool:
+	return preview_manager and preview_manager.is_running()
+
+#endregion
+
+#region helper methods
+				
+func get_row_index_for_note_type(note_type: Note.type) -> int:
+	match note_type:
+		Note.type.LEFT:
+			return 0  # Row1
+		Note.type.UP:
+			return 1  # Row2
+		Note.type.RIGHT:
+			return 2  # Row3
+		Note.type.DOWN:
+			return 3  # Row4
+		Note.type.SPACE:
+			return 4  # Row5
+		_:
+			return -1
+			
+# Get the Note type for a specific row
+func get_note_type_for_row(row_index: int) -> Note.type:
+	match row_index:
+		0:
+			return Note.type.LEFT
+		1:
+			return Note.type.UP
+		2:
+			return Note.type.RIGHT
+		3:
+			return Note.type.DOWN
+		4:
+			return Note.type.SPACE
+		_:
+			return Note.type.SPACE  # Default
+			
+func get_notes_as_json() -> String:
+	var data = {}
+	
+	for beat in note_references:
+		var beat_str = str(beat)
+		data[beat_str] = {}
+		
+		for row in note_references[beat]:
+			var note_type = note_references[beat][row]
+			var note_type_str = Note.type.keys()[note_type]
+			data[beat_str][str(row)] = note_type_str
+	
+	var json_string = JSON.stringify(data, "\t")
+	return json_string
+	
+# Add this function to get all grid notes in the correct format
+func get_all_notes() -> Dictionary:
+	return note_references.duplicate(true)
+		
+func is_future_note(beat: int, row_index: int) -> bool:
+	if track_manager == null:
+		return false
+	
+	var track_notes = track_manager.current_track
+	if not track_notes.has(beat):
+		return false
+	
+	return track_notes[beat].has(row_index) and (not note_references.has(beat) or not note_references[beat].has(row_index))
+#endregion

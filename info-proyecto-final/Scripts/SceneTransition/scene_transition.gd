@@ -30,3 +30,4 @@ func return_from_minigame() -> void:
 	return_trigger_name = ""
 	return_spawn_marker = ""
 	goto_scene(path, trigger, marker)
+	

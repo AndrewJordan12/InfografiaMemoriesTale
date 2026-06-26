@@ -1,30 +1,30 @@
 [gd_scene format=3 uid="uid://djbq0mrt16emt"]
 
-[ext_resource type="Script" uid="uid://ccjohre5f03fb" path="res://Scripts/FluteMinigame/flute_main.gd" id="1_ty82l"]
-[ext_resource type="Texture2D" uid="uid://cjpjquvp6gbql" path="res://Assets/FluteMinigame/Partiture.png" id="2_q50bp"]
-[ext_resource type="Texture2D" uid="uid://chj6fecr12t6r" path="res://Assets/FluteMinigame/Flute.png" id="3_yc2nk"]
-[ext_resource type="Script" uid="uid://k28a64issrpx" path="res://Scripts/FluteMinigame/grid.gd" id="4_0vfbu"]
-[ext_resource type="PackedScene" uid="uid://b7060oqjnb72o" path="res://Scenes/UI/FluteMinigame/Note.tscn" id="5_gsfgj"]
-[ext_resource type="Shader" uid="uid://cmjtjejbyra2h" path="res://Shaders/FluteMinigame_CurrentNote.gdshader" id="6_rjc3n"]
-[ext_resource type="Script" uid="uid://bkbbr8t8jy31" path="res://Scripts/FluteMinigame/beat_timer.gd" id="7_wi5h2"]
+[ext_resource type="Script" uid="uid://ccjohre5f03fb" path="res://Scripts/Minigames/FluteMinigame/flute_main.gd" id="1_6c3n7"]
+[ext_resource type="Texture2D" uid="uid://cjpjquvp6gbql" path="res://Assets/FluteMinigame/Partiture.png" id="2_4yj62"]
+[ext_resource type="Texture2D" uid="uid://chj6fecr12t6r" path="res://Assets/FluteMinigame/Flute.png" id="3_nqqv5"]
+[ext_resource type="Script" uid="uid://k28a64issrpx" path="res://Scripts/Minigames/FluteMinigame/grid.gd" id="4_ulmnt"]
+[ext_resource type="Shader" uid="uid://cmjtjejbyra2h" path="res://Shaders/FluteMinigame_CurrentNote.gdshader" id="5_uyu47"]
+[ext_resource type="PackedScene" uid="uid://b7060oqjnb72o" path="res://Scenes/Minigames/FluteMinigame/Note.tscn" id="6_qtbxa"]
+[ext_resource type="Script" uid="uid://bkbbr8t8jy31" path="res://Scripts/Minigames/FluteMinigame/beat_timer.gd" id="7_do3ap"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ln8l8"]
-shader = ExtResource("6_rjc3n")
+shader = ExtResource("5_uyu47")
 shader_parameter/fade_height = 0.4970000236075
 shader_parameter/fade_curve = 0.13500000315262
 
 [node name="FluteMinigame" type="CanvasLayer" unique_id=263839761]
 layer = 0
-script = ExtResource("1_ty82l")
+script = ExtResource("1_6c3n7")
 
 [node name="Partiture" type="Sprite2D" parent="." unique_id=1921361843]
 position = Vector2(513, 610)
 scale = Vector2(1, 1.1028037)
-texture = ExtResource("2_q50bp")
+texture = ExtResource("2_4yj62")
 
 [node name="Flute" type="Sprite2D" parent="." unique_id=161110882]
 position = Vector2(1037, 445)
-texture = ExtResource("3_yc2nk")
+texture = ExtResource("3_nqqv5")
 
 [node name="Grid" type="Control" parent="." unique_id=1807180957]
 layout_mode = 3
@@ -37,7 +37,7 @@ offset_right = -210.0
 offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_0vfbu")
+script = ExtResource("4_ulmnt")
 
 [node name="CurrentNote" type="HBoxContainer" parent="Grid" unique_id=1833643491]
 layout_mode = 0
@@ -130,74 +130,87 @@ offset_bottom = 380.0
 [node name="Row1" type="HBoxContainer" parent="Grid/Rows" unique_id=558266099]
 layout_mode = 2
 
-[node name="MusicalNote" parent="Grid/Rows/Row1" unique_id=1630838672 instance=ExtResource("5_gsfgj")]
+[node name="Note" parent="Grid/Rows/Row1" unique_id=640658092 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote2" parent="Grid/Rows/Row1" unique_id=640658092 instance=ExtResource("5_gsfgj")]
+[node name="Note2" parent="Grid/Rows/Row1" unique_id=972231444 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote3" parent="Grid/Rows/Row1" unique_id=1313711040 instance=ExtResource("5_gsfgj")]
+[node name="Note3" parent="Grid/Rows/Row1" unique_id=1297541698 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote4" parent="Grid/Rows/Row1" unique_id=1804059290 instance=ExtResource("5_gsfgj")]
+[node name="Note4" parent="Grid/Rows/Row1" unique_id=1290014908 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote5" parent="Grid/Rows/Row1" unique_id=850548378 instance=ExtResource("5_gsfgj")]
+[node name="Note5" parent="Grid/Rows/Row1" unique_id=904270949 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote6" parent="Grid/Rows/Row1" unique_id=948688997 instance=ExtResource("5_gsfgj")]
+[node name="Note6" parent="Grid/Rows/Row1" unique_id=31810169 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote7" parent="Grid/Rows/Row1" unique_id=1439838251 instance=ExtResource("5_gsfgj")]
+[node name="Note7" parent="Grid/Rows/Row1" unique_id=2034966707 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote8" parent="Grid/Rows/Row1" unique_id=1115986422 instance=ExtResource("5_gsfgj")]
+[node name="Note8" parent="Grid/Rows/Row1" unique_id=2081376 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote9" parent="Grid/Rows/Row1" unique_id=423726165 instance=ExtResource("5_gsfgj")]
+[node name="Note9" parent="Grid/Rows/Row1" unique_id=1482663292 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote10" parent="Grid/Rows/Row1" unique_id=1652814620 instance=ExtResource("5_gsfgj")]
+[node name="Note10" parent="Grid/Rows/Row1" unique_id=1290342207 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
-[node name="MusicalNote11" parent="Grid/Rows/Row1" unique_id=1119618103 instance=ExtResource("5_gsfgj")]
+[node name="Note11" parent="Grid/Rows/Row1" unique_id=2145672047 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
 [node name="Row2" type="HBoxContainer" parent="Grid/Rows" unique_id=2102046213]
 layout_mode = 2
 
-[node name="MusicalNote" parent="Grid/Rows/Row2" unique_id=2111826339 instance=ExtResource("5_gsfgj")]
+[node name="Note" parent="Grid/Rows/Row2" unique_id=1634814153 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
 [node name="Row3" type="HBoxContainer" parent="Grid/Rows" unique_id=1633746668]
 layout_mode = 2
 
-[node name="MusicalNote" parent="Grid/Rows/Row3" unique_id=1734037121 instance=ExtResource("5_gsfgj")]
+[node name="Note" parent="Grid/Rows/Row3" unique_id=933197338 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
 [node name="Row4" type="HBoxContainer" parent="Grid/Rows" unique_id=726275250]
 layout_mode = 2
 
-[node name="MusicalNote" parent="Grid/Rows/Row4" unique_id=1933596635 instance=ExtResource("5_gsfgj")]
+[node name="Note" parent="Grid/Rows/Row4" unique_id=1073616477 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
 [node name="Row5" type="HBoxContainer" parent="Grid/Rows" unique_id=1844908472]
 layout_mode = 2
 
-[node name="MusicalNote" parent="Grid/Rows/Row5" unique_id=450706777 instance=ExtResource("5_gsfgj")]
+[node name="Note" parent="Grid/Rows/Row5" unique_id=1116157403 instance=ExtResource("6_qtbxa")]
 layout_mode = 2
 
 [node name="Metronome_Timer" type="Timer" parent="." unique_id=677076743]
-script = ExtResource("7_wi5h2")
+script = ExtResource("7_do3ap")
 bpm = 100.0
 
 [node name="Countdown_Timer" type="Timer" parent="." unique_id=1446506421]
 
 [node name="Countdown" type="Label" parent="." unique_id=1088370608]
-visible = false
 offset_left = 28.0
 offset_top = 516.0
 offset_right = 118.0
 offset_bottom = 730.0
 theme_override_font_sizes/font_size = 157
 text = "0"
+
+[node name="Instructions" type="Label" parent="." unique_id=309221752]
+modulate = Color(1, 1, 1, 0.60784316)
+z_index = 3
+offset_left = 148.0
+offset_top = 500.0
+offset_right = 957.0
+offset_bottom = 797.0
+theme_override_font_sizes/font_size = 71
+text = "PRESS SPACE TO START
+PRESS ESC TO EXIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

@@ -18,9 +18,13 @@ var retries : int = 0
 var keypad_scene = preload("res://Scenes/UI/Keypad.tscn")
 var keypad_instance 
 var ui_layer:CanvasLayer
-
+#map_name
+var map_name_label = ""
+#playerstates
+enum player_state {WALKING, STANDING, TALKING}
+var player : player_state = player_state.WALKING
 #fluteminigame
-enum fluteState {PLAYING, PREVIEW, IDLE}
+enum fluteState {PLAYING, PREVIEW, IDLE, WIN}
 var flute_current_state : fluteState = fluteState.IDLE
 
 func _ready():
@@ -59,7 +63,21 @@ func get_digit(receiver_id: String) -> int:
 	
 func get_code_lenght() -> int:
 	return code_length
+
+func display_digit_in_scene(key: String) -> String:
+	if not assigned_ids.has(key):
+		return ""
 	
+	var result = ""
+	
+	for k in assigned_ids:
+		if k == key:
+			result += str(assigned_ids[k])
+		else:
+			result += " _"
+	
+	return result
+
 func validate_code(code:String) -> bool:
 	if code.length() != code_length:
 		return false
@@ -88,14 +106,5 @@ func on_failed():
 func on_won():
 	print("WON")
 
-#Flute minigame
-#region fluteminigame
-func flute_start():
-	flute_current_state = fluteState.PLAYING
-	
-func flute_stop():
-	flute_current_state = fluteState.PLAYING
-	
-func flute_exit():
-	flute_current_state = fluteState.PLAYING
-#endregion
+func player_change(new_state:player_state):
+	player = new_state

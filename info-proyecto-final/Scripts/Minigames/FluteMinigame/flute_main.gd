@@ -6,32 +6,36 @@ extends CanvasLayer
 @onready var rows : VBoxContainer = $Grid/Rows
 @onready var beat_highlight : HBoxContainer = $Grid/CurrentNote
 @onready var countdown_label : Label = $Countdown 
+@onready var instructions_label : Label = $Instructions 
 
 var loop_metronome = false
 var track_manager = TrackManager.new()
-var current_track_name: String = "example_track"  
+var current_track_name: String = "0"  
 
 var beat : int = 0
 var partiture = []
 var beat_current_notes = []
 var preview_active: bool = false
+var countdown_active : bool = false
 
 func _ready() -> void:
 	metronome_timer.beat_tick.connect(_on_beat_tick)
 	countdown_timer.timeout.connect(_on_countdown_tick)
-	load_track()
+	load_track(current_track_name)
 	grid.setup_preview_manager(track_manager)
 	
 func _process(_delta: float) -> void:
 	##if(State.fluteState.PLAYING):
-	if Input.is_action_just_pressed("test"):
-		start_countdown()
-	if Input.is_action_just_pressed("replay"):
-		reset_and_restart()
-	if Input.is_action_just_pressed("preview"):
-		start_preview()
+	if State.flute_current_state == State.fluteState.WIN:
+		on_completed_minigame()
+	if Input.is_action_just_pressed("interact"):
+		if (State.flute_current_state == State.fluteState.IDLE and State.player != State.player_state.WALKING and !countdown_active):
+			reset_and_restart()
+	if Input.is_action_just_pressed("esc"):
+		if (State.flute_current_state != State.fluteState.PLAYING):
+			close_overlay()
 	
-	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null:
+	if State.flute_current_state == State.fluteState.PLAYING and get_input() != null and !countdown_active:
 		store_note(get_input())
 	#grid.draw_partiture(partiture)
 
@@ -65,8 +69,6 @@ func store_note(input : Note.type):
 		beat_current_notes.append(input)
 		grid.add_beat_notes(beat, beat_current_notes)
 		AudioManager.sfx_fluteminigame(enum_to_string(input))#sound according to input
-	else:
-		print("Duplicate or full")
 
 func beat_is_repeated(new_note : Note.type):
 	for note in beat_current_notes:
@@ -90,18 +92,22 @@ func get_input():
 #region start/stop countdown handler
 func start_playing():
 	State.flute_current_state = State.fluteState.PLAYING
+	countdown_active = false
 	toggle_metronome()
 	grid.update_beat_highlight(beat)
-	print("Playing started!")
 
 func stop_playing():
 	State.flute_current_state = State.fluteState.IDLE
 	toggle_metronome()
+	grid.set_show_future_notes(false)
 	countdown_label.visible = false
-	print("Playing stopped")
+	instructions_label.visible = true
+	instructions_label.text = "PRESS SPACE TO CONTINUE (" + str(int(current_track_name)+1) + "/3)"
 
 func start_countdown():
-	print("clik")
+	grid.set_show_future_notes(true)
+	countdown_active = true
+	instructions_label.visible = false
 	countdown_label.visible = true
 	countdown_label.text = "3"
 	countdown_timer.start()
@@ -123,13 +129,25 @@ func _on_countdown_tick():
 #endregion
 
 #region UI controls
-func close_UI():
-	visible = false
+
+func close_overlay():
+	if State.flute_current_state != State.fluteState.PLAYING || State.flute_current_state != State.fluteState.PREVIEW:
+		if State.player != State.player_state.WALKING:
+			var parent = get_parent()
+			if parent:
+				var trigger = parent.get_node_or_null("MinigameTrigger")
+				print(trigger)
+				print(trigger.name)
+				print(trigger.trigger_name)
+				if trigger and trigger.trigger_name == name:
+					trigger.hide_overlay()
+			State.player = State.player_state.WALKING
 #endregion
 
 #region track
 
-func load_track():
+func load_track(new_track: String):
+	current_track_name = new_track
 	if not track_manager.load_track(current_track_name):
 		print("Failed to load track: ", current_track_name)
 	
@@ -144,13 +162,24 @@ func check_win_condition():
 
 func on_win():
 	stop_playing()
-	countdown_label.text = "🎉"
-	countdown_label.visible = true
-
+	countdown_label.visible = false
+	if current_track_name == "0":
+		load_track("1")
+		return
+	if current_track_name == "1":
+		load_track("2")
+		return
+	if current_track_name == "2":
+		on_completed_minigame()
+		return
+		
+func on_completed_minigame():
+	instructions_label.text = "COMPLETE! (3/3) NUMBER IS : " + State.display_digit_in_scene("13")+ "\n PRESS ESC TO EXIT"
+	State.flute_current_state = State.fluteState.WIN
+		
 func on_lose():
 	stop_playing()
-	countdown_label.text = "❌"
-	countdown_label.visible = true
+	instructions_label.text = "PRESS SPACE TO RETRY (" + str(int(current_track_name)+1) + "/3) \n PRESS ESC TO EXIT"
 
 func reset_and_restart():
 	beat = 0
@@ -159,6 +188,7 @@ func reset_and_restart():
 	beat_current_notes = []
 	countdown_label.visible = false
 	start_countdown()
+	
 #endregion
 
 #region preview

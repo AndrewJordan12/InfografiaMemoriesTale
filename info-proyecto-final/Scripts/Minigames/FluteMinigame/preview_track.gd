@@ -80,7 +80,7 @@ func show_beat_notes(beat: int):
 				if note_node is Note:
 					# Reset scale and show with animation
 					note_node.scale = Vector2(1.0, 1.0)
-					grid.show_note_animated(note_node)
+					note_node.show_note_animated()
 
 # Show all future notes at low opacity
 func show_future_notes(current_beat: int):

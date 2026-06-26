@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://biy46sjep7td3"]
+
+[ext_resource type="Script" uid="uid://3l3v3q5jvg0q" path="res://Scripts/UI/boolean_prompt.gd" id="1_kt18d"]
+
+[sub_resource type="Theme" id="Theme_kk0yn"]
+
+[node name="BooleanPrompt" type="CanvasLayer" unique_id=922245451]
+script = ExtResource("1_kt18d")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=460680493]
+offset_right = 175.0
+offset_bottom = 95.0
+theme = SubResource("Theme_kk0yn")
+color = Color(0.13333334, 0.09803922, 0.09803922, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect" unique_id=344541114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kk0yn")
+color = Color(0.80659324, 0.675998, 0.5719689, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect/ColorRect2" unique_id=1883634548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = -3.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_kk0yn")
+color = Color(0.13333334, 0.09803922, 0.09803922, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1547715962]
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 165.0
+offset_bottom = 59.0
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 9
+text = "asdas
+sadas
+asdas
+asd"
+autowrap_mode = 3
+
+[node name="yes" type="Button" parent="." unique_id=675375262]
+modulate = Color(0.9765405, 0.8734738, 0.7725293, 1)
+offset_left = 30.0
+offset_top = 60.0
+offset_right = 81.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 10
+text = "Yes"
+
+[node name="no" type="Button" parent="." unique_id=1960983979]
+modulate = Color(0.9764706, 0.8745098, 0.77254903, 1)
+offset_left = 90.0
+offset_top = 60.0
+offset_right = 141.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 10
+text = "No"
+
+[connection signal="button_up" from="yes" to="." method="_on_yes_button_up"]
+[connection signal="button_up" from="no" to="." method="_on_no_button_up"]

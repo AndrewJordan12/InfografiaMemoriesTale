@@ -1,5 +1,5 @@
 extends Control
-@onready var note_scene = preload("res://Scenes/UI/FluteMinigame/Note.tscn")
+@onready var note_scene = preload("res://Scenes/Minigames/FluteMinigame/Note.tscn")
 @onready var rows : VBoxContainer = $Rows
 @onready var beat_highlight : HBoxContainer = $CurrentNote
 @onready var beat_highlight_template = $CurrentNote/Highlight_Template
@@ -9,18 +9,23 @@ var note_references: Dictionary = {}
 var last_updated_beat: int = -1
 
 var preview_manager: PreviewManager
+var track_manager_ref: TrackManager 
+var show_future_notes: bool = false 
+var future_notes_drawn: bool = false
 
 func _ready() -> void:
 	create_highlights() #creates appropiate amount of highlights
 	update_beat_highlight(-1) #hides all already placed highlights by default
 	create_notes() # #Clears notes in the scene and fills the grid with invisible notes
 	preview_manager = PreviewManager.new()
-	
-#region create and clear notes
+
+#region create notes
 #Clears notes in the scene and fills the grid with invisible notes
 func create_notes():
 	clear_existing_notes()
 	note_references.clear()
+	show_future_notes = false
+	future_notes_drawn = false
 	
 	for row_index in range(rows.get_child_count()):
 		var row = rows.get_child(row_index)
@@ -63,6 +68,17 @@ func add_beat_notes(beat: int, notes: Array):
 	last_updated_beat = beat
 	update_grid_display()
 
+func set_show_future_notes(enabled: bool):
+	if show_future_notes == enabled:
+		return
+	show_future_notes = enabled
+	future_notes_drawn = false  # Reset flag when toggled
+	
+	if enabled:
+		draw_future_notes()
+	else:
+		hide_future_notes()
+
 #endregion
 
 #region draw current grid
@@ -72,6 +88,10 @@ func update_grid_display():
 		return
 	
 	hide_all_notes() #puts all notes in alpha 0.0
+	
+		# Draw future notes if enabled (they persist)
+	if show_future_notes and not future_notes_drawn:
+		draw_future_notes()
 	
 	for beat_index in note_references:
 		for row_index in note_references[beat_index]:
@@ -89,25 +109,16 @@ func show_note_at_position(note_type: Note.type, position_index: int, animate: b
 	if position_index < row.get_child_count():
 		var note_node = row.get_child(position_index)
 		if note_node is Note:
-			note_node.scale = Vector2(1.0, 1.0)  # Reset scale
-			
 			if animate:
-				show_note_animated(note_node)
+				note_node.show_note_animated()
 			else:
 				note_node.modulate.a = 1.0		
-
-# Animated function to show a note
-func show_note_animated(note_node: Node, duration: float = 0.3):
-	# Bounce effect
-	var tween = create_tween()
-	tween.tween_property(note_node, "modulate:a", 1.0, duration * 0.5)
-	tween.tween_property(note_node, "scale", Vector2(1.2, 1.2), duration * 0.3)
-	tween.tween_property(note_node, "scale", Vector2(1.0, 1.0), duration * 0.2)
 
 #clears references and hides all notes
 func clear_all_notes():
 	note_references.clear()
 	hide_all_notes()
+	future_notes_drawn = false
 
 # puts all notes in the partiture to alpha 0
 func hide_all_notes():
@@ -116,8 +127,47 @@ func hide_all_notes():
 		for col_index in range(row.get_child_count()):
 			var note = row.get_child(col_index)
 			if note is Note:
-				note.modulate.a = 0.0
+				if not show_future_notes or not is_future_note(col_index, row_index):
+					note.modulate.a = 0.0
+				
+#Draws future notes in the track
+func draw_future_notes():
+	if future_notes_drawn or track_manager_ref == null:
+		return
+	
+	var track_notes = track_manager_ref.current_track
+	
+	for beat in track_notes:
+		for row_index in track_notes[beat]:
+			if beat < columns:
+				var row = rows.get_child(row_index)
+				if beat < row.get_child_count():
+					var note_node = row.get_child(beat)
+					if note_node is Note:
+						# Only show if not already played
+						if not note_references.has(beat) or not note_references[beat].has(row_index):
+							note_node.modulate.a = 0.3
+	
+	future_notes_drawn = true
 
+# Hide future notes
+func hide_future_notes():
+	if track_manager_ref == null:
+		return
+	
+	var track_notes = track_manager_ref.current_track
+	
+	for beat in track_notes:
+		for row_index in track_notes[beat]:
+			if beat < columns:
+				var row = rows.get_child(row_index)
+				if beat < row.get_child_count():
+					var note_node = row.get_child(beat)
+					if note_node is Note:
+						if not note_references.has(beat) or not note_references[beat].has(row_index):
+							note_node.modulate.a = 0.0
+	
+	future_notes_drawn = false
 #endregion
 	
 #region highlight
@@ -148,6 +198,7 @@ func update_beat_highlight(beat: int):
 
 #region preview
 func setup_preview_manager(track_manager: TrackManager):
+	track_manager_ref = track_manager
 	preview_manager.initialize(self, track_manager, columns)
 	add_child(preview_manager)
 	
@@ -219,4 +270,15 @@ func get_notes_as_json() -> String:
 # Add this function to get all grid notes in the correct format
 func get_all_notes() -> Dictionary:
 	return note_references.duplicate(true)
+	
+	
+func is_future_note(beat: int, row_index: int) -> bool:
+	if track_manager_ref == null:
+		return false
+	
+	var track_notes = track_manager_ref.current_track
+	if not track_notes.has(beat):
+		return false
+	
+	return track_notes[beat].has(row_index) and (not note_references.has(beat) or not note_references[beat].has(row_index))
 #endregion

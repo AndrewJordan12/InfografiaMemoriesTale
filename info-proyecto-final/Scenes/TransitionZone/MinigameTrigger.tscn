@@ -13,3 +13,6 @@ shape = SubResource("RectangleShape2D_0qukt")
 
 [node name="Spawnpoint" type="Marker2D" parent="." unique_id=77442625]
 position = Vector2(150, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -63,4 +63,3 @@ func assign_digit(value: int):
 
 func on_digit_received():
 	pass
-	

@@ -31,3 +31,9 @@ func set_note_value():
 func change_type(new_type: type):
 	note_type = new_type
 	set_note_value()  # Update the texture
+
+func show_note_animated(duration: float = 0.3):
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, duration * 0.5)
+	tween.tween_property(self, "scale", Vector2(1.2, 1.2), duration * 0.3)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), duration * 0.2)

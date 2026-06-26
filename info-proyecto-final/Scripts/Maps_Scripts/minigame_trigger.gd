@@ -2,6 +2,7 @@ extends Area2D
 
 @export var target_scene: String = ""
 @export var trigger_name: String = ""
+@export var is_overlay: bool = false
 
 var _player: CharacterBody2D
 var _triggered: bool = false
@@ -21,7 +22,6 @@ func _process(delta: float) -> void:
 			_waiting = false
 			SceneTransition.return_spawn_marker = "Spawnpoint"
 			SceneTransition.goto_minigame(target_scene, get_tree().current_scene.scene_file_path, trigger_name)
-
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and not _triggered:
 		_player = body

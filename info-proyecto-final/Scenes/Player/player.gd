@@ -33,7 +33,8 @@ var min_scale : float
 var max_scale : float
 
 func _physics_process(delta: float) -> void:
-	move_character(delta)
+	if State.player == State.player_state.WALKING:
+		move_character(delta)
 	_refresh_bubble()
 	apply_perspective_scaling()
 #So the character's body scales according to its Y position, giving it depth
@@ -43,21 +44,6 @@ func apply_perspective_scaling():
 	t = clamp(t, 0.0, 1.0)
 	character_scale = lerp(min_scale, max_scale, t)
 	scale = Vector2(character_scale, character_scale)
-
-func _refresh_bubble() -> void:
-	if _bubble_label == null:
-		return
-	if bubble_text == "":
-		_bubble_label.visible = false
-		return
-	_bubble_label.text = bubble_text
-	_bubble_label.add_theme_color_override("font_color", Color.BLACK)
-	var bg = StyleBoxFlat.new()
-	bg.bg_color = Color.WHITE
-	bg.set_corner_radius_all(8)
-	bg.set_content_margin_all(6)
-	_bubble_label.add_theme_stylebox_override("normal", bg)
-	_bubble_label.visible = true
 
 func load_scene_scaling_settings():
 	if parent_node:
@@ -93,3 +79,19 @@ func move_character(delta:float) -> void:
 		
 	move_and_slide()
 #endregion
+
+func _refresh_bubble() -> void:
+	if _bubble_label == null:
+		return
+	if bubble_text == "":
+		_bubble_label.visible = false
+		return
+	_bubble_label.text = bubble_text
+	_bubble_label.add_theme_color_override("font_color", Color.BLACK)
+	var bg = StyleBoxFlat.new()
+	bg.bg_color = Color.WHITE
+	bg.set_corner_radius_all(8)
+	bg.set_content_margin_all(6)
+	_bubble_label.add_theme_stylebox_override("normal", bg)
+	_bubble_label.visible = true
+	

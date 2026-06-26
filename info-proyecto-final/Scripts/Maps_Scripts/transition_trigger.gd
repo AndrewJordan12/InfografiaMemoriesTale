@@ -2,6 +2,7 @@ extends Area2D
 
 @export var target_scene: String = ""
 @export var spawn_marker: String = ""
+@onready var labelMap : Label = get_parent().get_node("MapMention")
 
 var _player: CharacterBody2D
 var _triggered: bool = false
@@ -41,6 +42,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and not _triggered:
 		_player = body
 		_player.bubble_text = _get_destination_text()
+		labelMap.visible = true
+		labelMap.text = _get_destination_text()
 		_triggered = true
 		_waiting = true
 		_bubble_timer = 0.8

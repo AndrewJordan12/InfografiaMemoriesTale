@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var acceleration: float = 10.0
 @export var friction: float = 15.0
 
+var maplabel: Label 
 var bubble_text: String = ""
 var _bubble_label: Label
 var last_direction: String = "front"
@@ -100,12 +101,19 @@ func move_character(delta:float) -> void:
 #endregion
 
 func _refresh_bubble() -> void:
+	if maplabel == null:
+		maplabel=get_parent().get_node("MapMention")
 	if _bubble_label == null:
 		return
 	if bubble_text == "":
 		_bubble_label.visible = false
+		if maplabel != null:
+			maplabel.visible = false
 		return
+	if maplabel != null:
+		maplabel.text = bubble_text
 	_bubble_label.text = bubble_text
+	
 	_bubble_label.add_theme_color_override("font_color", Color.BLACK)
 	var bg = StyleBoxFlat.new()
 	bg.bg_color = Color.WHITE

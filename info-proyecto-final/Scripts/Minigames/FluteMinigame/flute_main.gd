@@ -19,7 +19,7 @@ var preview_active: bool = false
 func _ready() -> void:
 	metronome_timer.beat_tick.connect(_on_beat_tick)
 	countdown_timer.timeout.connect(_on_countdown_tick)
-	load_track()
+	load_track(current_track_name)
 	grid.setup_preview_manager(track_manager)
 	
 func _process(_delta: float) -> void:
@@ -65,8 +65,6 @@ func store_note(input : Note.type):
 		beat_current_notes.append(input)
 		grid.add_beat_notes(beat, beat_current_notes)
 		AudioManager.sfx_fluteminigame(enum_to_string(input))#sound according to input
-	else:
-		print("Duplicate or full")
 
 func beat_is_repeated(new_note : Note.type):
 	for note in beat_current_notes:
@@ -90,6 +88,7 @@ func get_input():
 #region start/stop countdown handler
 func start_playing():
 	State.flute_current_state = State.fluteState.PLAYING
+	grid.set_show_future_notes(true)
 	toggle_metronome()
 	grid.update_beat_highlight(beat)
 	print("Playing started!")
@@ -97,6 +96,7 @@ func start_playing():
 func stop_playing():
 	State.flute_current_state = State.fluteState.IDLE
 	toggle_metronome()
+	grid.set_show_future_notes(false)
 	countdown_label.visible = false
 	print("Playing stopped")
 
@@ -129,7 +129,8 @@ func close_UI():
 
 #region track
 
-func load_track():
+func load_track(new_track: String):
+	current_track_name = new_track
 	if not track_manager.load_track(current_track_name):
 		print("Failed to load track: ", current_track_name)
 	
@@ -159,6 +160,7 @@ func reset_and_restart():
 	beat_current_notes = []
 	countdown_label.visible = false
 	start_countdown()
+	
 #endregion
 
 #region preview

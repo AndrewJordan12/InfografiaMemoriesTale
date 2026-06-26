@@ -48,3 +48,4 @@ pitch_scale = 0.9
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Soundtrack" unique_id=703955274]
 stream = ExtResource("3_u6owb")
+volume_db = -15.0

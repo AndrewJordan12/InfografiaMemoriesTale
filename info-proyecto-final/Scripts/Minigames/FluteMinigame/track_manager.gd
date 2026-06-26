@@ -4,7 +4,7 @@ class_name TrackManager
 # Track data structure: {beat: {row_index: note_type}}
 var current_track: Dictionary = {}
 var track_name: String = ""
-var file_path = "res://Scripts/FluteMinigame/Tracks/"
+var file_path = "res://Scripts/Minigames/FluteMinigame/Tracks/"
 
 # Load a track from a JSON file
 func load_track(track_name: String) -> bool:

@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var main = get_node("/root/State")
 @onready var gameover = $GameOver
 @onready var cups_parent = $PanelContainer/Cups
 @onready var cup_scene = preload("res://Scenes/Minigames/ShuffleCup/Cup.tscn")
@@ -15,6 +16,7 @@ const BALL_OFFSET := Vector2(70, 165)
 var accepting_input := false
 var max_attempts : int = 3
 var attempts : int = max_attempts
+var digit : int = 0
 const MAX_CUPS := 5
 
 const LEVELS = {
@@ -33,6 +35,7 @@ const LEVELS = {
 }
 
 func _ready():
+	digit = main.get_digit("14")
 	await start()
 
 func start():
@@ -138,7 +141,7 @@ func handle_win():
 		await start_level(current_level + 1)
 		score_label.text = "Level:"+ str(current_level) + "/" + str(max_level)
 	else:
-		gameover.set_state(true, 1)
+		gameover.set_state(true, digit)
 		on_puzzle_ended()
 
 func handle_fail():
@@ -168,11 +171,6 @@ func on_puzzle_ended():
 func retry():
 	await start_level(current_level)
 
-func on_win(digit:int):
-	gameover.set_state(true, digit)
-
 func _on_game_over_on_retry() -> void:
 	attempts = max_attempts
 	await  start_level(1)
-
-	

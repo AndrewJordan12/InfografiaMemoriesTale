@@ -65,5 +65,4 @@ scale = Vector2(0.6, 0.6)
 mouse_filter = 2
 texture = ExtResource("5_xpof3")
 
-[connection signal="on_X" from="GameOver" to="." method="_on_game_over_on_x"]
 [connection signal="on_retry" from="GameOver" to="." method="_on_game_over_on_retry"]

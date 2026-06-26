@@ -1,13 +1,17 @@
 [gd_scene format=4 uid="uid://cofqj6ka4cnox"]
 
 [ext_resource type="PackedScene" uid="uid://cbyf7348b2rkf" path="res://Scenes/Maps_Scenes/_baseScene.tscn" id="1_qugsi"]
-[ext_resource type="Texture2D" uid="uid://c3an686jxp68s" path="res://Assets/Maps/Download/12_ForestPath.png" id="2_ke14y"]
+[ext_resource type="Texture2D" uid="uid://c3an686jxp68s" path="res://Assets/Maps/12_ForestPath.png" id="2_ke14y"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
 [ext_resource type="PackedScene" uid="uid://hf4pe8716nlf" path="res://Scenes/TransitionZone/TransitionZone.tscn" id="5_ke14y"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftStatueTrigger"]
-size = Vector2(644.5, 10)
+size = Vector2(589, 7)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape"]
+size = Vector2(639, 53)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_qugsi")]
 receiver_id = "12"
@@ -26,22 +30,35 @@ position = Vector2(839, 534)
 position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/10_Statue.tscn"
+spawn_marker = "RightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=2009766882]
-position = Vector2(322.75, 311)
+position = Vector2(294.5, 516.5)
 shape = SubResource("ShapeLeftStatueTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="LeftTrigger" index="1" unique_id=335738408]
+position = Vector2(319.5, 493.5)
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger/ShowNextAreaName" index="0" unique_id=142705092]
+shape = SubResource("ShowNextAreaNameShape")
+
+[node name="Spawnpoint" type="Marker2D" parent="LeftTrigger" index="2" unique_id=1020958097]
+position = Vector2(702, 433)
 
 [node name="TransitionZone" parent="." index="3" unique_id=662219592 instance=ExtResource("5_ke14y")]
 position = Vector2(1122, 356)
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
 
 [node name="ShowNextAreaName" parent="TransitionZone" index="0" unique_id=2068300449]
-position = Vector2(-38, 27.25)
+position = Vector2(-75, 256)
+scale = Vector2(2, 3)
 
 [node name="TransitionZone" parent="TransitionZone" index="1" unique_id=1631346581]
-position = Vector2(-18, 9)
+position = Vector2(14, 251)
+scale = Vector2(1, 7)
 
 [node name="Spawnpoint" parent="TransitionZone" index="2" unique_id=872543783]
-position = Vector2(-124, -42)
+position = Vector2(-209, 316)
 
 [editable path="TransitionZone"]

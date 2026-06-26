@@ -4,12 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://d3qj8mtjcy53u" path="res://Assets/Maps/10_Statue.png" id="2_7mg2p"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftBridgeTrigger"]
-size = Vector2(573, 10)
+size = Vector2(617, 13)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(690, 117.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightForestTrigger"]
-size = Vector2(8, 109)
+size = Vector2(9, 143)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(109, 230)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_2wq4y")]
 receiver_id = "10"
@@ -28,16 +35,38 @@ position = Vector2(510.00003, 455)
 position = Vector2(576, 648)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/9_BridgeBottom.tscn"
+spawn_marker = "BottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger" index="0" unique_id=1211110460]
-position = Vector2(-17.5, -13)
+position = Vector2(4.5, 188.5)
 shape = SubResource("ShapeLeftBridgeTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="BottomTrigger" index="1" unique_id=1770802761]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger/ShowNextAreaName" index="0" unique_id=892490373]
+position = Vector2(-6, 136.625)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomTrigger" index="2" unique_id=386104075]
+position = Vector2(0, 75)
 
 [node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=1106975462]
 position = Vector2(1152, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/12_ForestPath.tscn"
+spawn_marker = "LeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=2137045602]
-position = Vector2(-4, 81.5)
+position = Vector2(24.5, 211.5)
 shape = SubResource("ShapeRightForestTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightTrigger" index="1" unique_id=1322341995]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger/ShowNextAreaName" index="0" unique_id=2093777467]
+position = Vector2(-25.5, 216)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=1822334852]
+position = Vector2(-86, 219)

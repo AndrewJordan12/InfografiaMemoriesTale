@@ -18,6 +18,15 @@ func _ready() -> void:
 	digit = main.get_digit(receiver_id)
 	if digit != -1:
 		assign_digit(digit)
+	if SceneTransition.minigame_won and SceneTransition.return_trigger_name != "":
+		_disable_minigame_trigger()
+		SceneTransition.minigame_won = false
+		SceneTransition.return_trigger_name = ""
+
+func _disable_minigame_trigger() -> void:
+	var trigger = get_node_or_null(SceneTransition.return_trigger_name)
+	if trigger and trigger.has_method("disable_trigger"):
+		trigger.disable_trigger()
 
 func _position_player() -> void:
 	var player = get_node_or_null("Player")
@@ -28,12 +37,21 @@ func _position_player() -> void:
 	var trigger = get_node_or_null(SceneTransition.spawn_trigger)
 	if trigger == null:
 		return
+	var spawn_pos: Vector2
+	if SceneTransition.spawn_marker != "":
+		var marker = trigger.get_node_or_null(SceneTransition.spawn_marker)
+		if marker:
+			spawn_pos = marker.global_position
+		else:
+			spawn_pos = trigger.position + Vector2(60, 0)
+	else:
+		spawn_pos = trigger.position + Vector2(60, 0)
 	var vp: Vector2 = get_viewport_rect().size
-	var pos: Vector2 = trigger.position + Vector2(60, 0)
-	pos.x = clampf(pos.x, 50, vp.x - 50)
-	pos.y = clampf(pos.y, 50, vp.y - 50)
-	player.position = pos
+	spawn_pos.x = clampf(spawn_pos.x, 50, vp.x - 50)
+	spawn_pos.y = clampf(spawn_pos.y, 50, vp.y - 50)
+	player.position = spawn_pos
 	SceneTransition.spawn_trigger = ""
+	SceneTransition.spawn_marker = ""
 
 func _process(_delta: float) -> void:
 	pass

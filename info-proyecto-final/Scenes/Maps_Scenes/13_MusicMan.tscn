@@ -4,15 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://upat48ldpebr" path="res://Assets/Maps/13_MusicMan.png" id="2_c544a"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeTop"]
-size = Vector2(150, 21.5)
+size = Vector2(125, 15)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(187, 76)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottomIceTrigger"]
-size = Vector2(628, 9)
+size = Vector2(687, 15)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(751, 94.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightPondTrigger"]
-size = Vector2(12, 105)
+size = Vector2(17, 173)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
+size = Vector2(104, 269)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_24xb2")]
 receiver_id = "13"
@@ -32,25 +42,58 @@ position = Vector2(702, 289)
 position = Vector2(576, 0)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/1_Entrance.tscn"
+spawn_marker = "BottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopTrigger" index="0" unique_id=937888903]
-position = Vector2(498, 164.25)
+position = Vector2(542.5, 215.5)
 shape = SubResource("ShapeTop")
+
+[node name="ShowNextAreaName" type="Area2D" parent="TopTrigger" index="1" unique_id=1586081788]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopTrigger/ShowNextAreaName" index="0" unique_id=1049238744]
+position = Vector2(511.5, 246)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="TopTrigger" index="2" unique_id=2144476042]
+position = Vector2(414, 281)
 
 [node name="BottomTrigger" type="Area2D" parent="." index="3" unique_id=1491568390]
 position = Vector2(576, 648)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/11_PondBench.tscn"
+spawn_marker = "RightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger" index="0" unique_id=2040889081]
-position = Vector2(-23, -12.5)
+position = Vector2(-18.5, 186.5)
 shape = SubResource("ShapeBottomIceTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="BottomTrigger" index="1" unique_id=1687443680]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger/ShowNextAreaName" index="0" unique_id=1725437292]
+position = Vector2(-3.5, 148.125)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomTrigger" index="2" unique_id=1726959550]
+position = Vector2(0, 104)
 
 [node name="RightTrigger" type="Area2D" parent="." index="4" unique_id=2064951427]
 position = Vector2(1152, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
+spawn_marker = "BottomLeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1305083598]
-position = Vector2(-6, 17.5)
+position = Vector2(18.5, 133.5)
 shape = SubResource("ShapeRightPondTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightTrigger" index="1" unique_id=1736692451]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger/ShowNextAreaName" index="0" unique_id=942104128]
+position = Vector2(-24, 134.5)
+shape = SubResource("ShowNextAreaNameShape2")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=615954597]
+position = Vector2(-76, 135)

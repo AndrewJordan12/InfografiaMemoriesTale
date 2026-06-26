@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dhp6c70p72bfv"]
+
+[ext_resource type="Script" uid="uid://bhgjfrm7rhqmf" path="res://Scripts/Minigames/ShuffleCup/cup.gd" id="1_xeihw"]
+[ext_resource type="Texture2D" uid="uid://cwfsbq51b7a6w" path="res://Assets/ShuffleCup/cup.png" id="2_ka4ee"]
+
+[node name="Cup" type="Button" unique_id=1611660113]
+custom_minimum_size = Vector2(200, 240)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -4.0
+offset_right = 4.0
+offset_bottom = 8.0
+grow_horizontal = 2
+flat = true
+script = ExtResource("1_xeihw")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=931546929]
+custom_minimum_size = Vector2(160, 200)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 180.0
+offset_bottom = 220.0
+texture = ExtResource("2_ka4ee")
+expand_mode = 1
+stretch_mode = 5

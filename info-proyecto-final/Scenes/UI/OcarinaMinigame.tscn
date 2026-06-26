@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://djbq0mrt16emt"]
+
+[ext_resource type="Texture2D" uid="uid://cjpjquvp6gbql" path="res://Assets/FluteMinigame/Partiture.png" id="1_du2xd"]
+[ext_resource type="PackedScene" uid="uid://b7060oqjnb72o" path="res://Scenes/UI/MusicalNote.tscn" id="2_5p3sw"]
+[ext_resource type="Texture2D" uid="uid://chj6fecr12t6r" path="res://Assets/FluteMinigame/Flute.png" id="2_lcu5o"]
+[ext_resource type="Script" uid="uid://k28a64issrpx" path="res://Scripts/FluteMinigame/grid.gd" id="3_5p3sw"]
+
+[node name="OcarinaMinigame" type="CanvasLayer" unique_id=263839761]
+
+[node name="Partiture" type="Sprite2D" parent="." unique_id=1921361843]
+position = Vector2(513, 610)
+scale = Vector2(1, 1.1028037)
+texture = ExtResource("1_du2xd")
+
+[node name="Flute" type="Sprite2D" parent="." unique_id=161110882]
+position = Vector2(1037, 445)
+texture = ExtResource("2_lcu5o")
+
+[node name="Grid" type="Control" parent="." unique_id=1807180957]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 141.0
+offset_top = 448.0
+offset_right = -210.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_5p3sw")
+
+[node name="Rows" type="VBoxContainer" parent="Grid" unique_id=710274440]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 832.0
+offset_bottom = 380.0
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Grid/Rows" unique_id=558266099]
+layout_mode = 2
+
+[node name="MusicalNote" parent="Grid/Rows/HBoxContainer1" unique_id=1630838672 instance=ExtResource("2_5p3sw")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Grid/Rows" unique_id=2102046213]
+layout_mode = 2
+
+[node name="MusicalNote" parent="Grid/Rows/HBoxContainer2" unique_id=640658092 instance=ExtResource("2_5p3sw")]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Grid/Rows" unique_id=1633746668]
+layout_mode = 2
+
+[node name="MusicalNote" parent="Grid/Rows/HBoxContainer3" unique_id=1734037121 instance=ExtResource("2_5p3sw")]
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Grid/Rows" unique_id=726275250]
+layout_mode = 2
+
+[node name="MusicalNote" parent="Grid/Rows/HBoxContainer4" unique_id=1933596635 instance=ExtResource("2_5p3sw")]
+layout_mode = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Grid/Rows" unique_id=1844908472]
+layout_mode = 2
+
+[node name="MusicalNote" parent="Grid/Rows/HBoxContainer5" unique_id=450706777 instance=ExtResource("2_5p3sw")]
+layout_mode = 2

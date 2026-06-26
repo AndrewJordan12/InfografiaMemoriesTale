@@ -1,18 +1,32 @@
 [gd_scene format=4 uid="uid://y2ur0usce2rs"]
 
 [ext_resource type="PackedScene" uid="uid://cbyf7348b2rkf" path="res://Scenes/Maps_Scenes/_baseScene.tscn" id="1_kj3bd"]
-[ext_resource type="Texture2D" uid="uid://diuq0ej75bf6u" path="res://Assets/Maps/Download/9_BridgeBottom.png" id="2_g8gf8"]
+[ext_resource type="Texture2D" uid="uid://diuq0ej75bf6u" path="res://Assets/Maps/9_BridgeBottom.png" id="2_g8gf8"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
+[ext_resource type="Script" uid="uid://gtxap4vacrfe" path="res://Scripts/Maps_Scripts/minigame_trigger.gd" id="7_mingame"]
 
 [sub_resource type="RectangleShape2D" id="ShapeTopBridgeTrigger"]
-size = Vector2(160, 11)
+size = Vector2(192, 5)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(305, 177.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeRightStatueTrigger"]
-size = Vector2(1152, 15)
+size = Vector2(1181, 11)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(1117, 67.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftPondTrigger"]
-size = Vector2(15, 287)
+size = Vector2(10, 393)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape2"]
+size = Vector2(65, 385)
+
+[sub_resource type="RectangleShape2D" id="ShapeMinigameTrigger"]
+size = Vector2(13, 324)
 
 [node name="MapTexture" unique_id=518045972 instance=ExtResource("1_kj3bd")]
 receiver_id = "9"
@@ -31,25 +45,71 @@ position = Vector2(595, 431)
 position = Vector2(576, 0)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/8_BridgeMiddle.tscn"
+spawn_marker = "LeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopTrigger" index="0" unique_id=720582826]
-position = Vector2(32, 133.5)
+position = Vector2(48, 194.5)
 shape = SubResource("ShapeTopBridgeTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="TopTrigger" index="1" unique_id=1221360729]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopTrigger/ShowNextAreaName" index="0" unique_id=1302819298]
+position = Vector2(56.5, 194.375)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="TopTrigger" index="2" unique_id=1764936599]
+position = Vector2(55, 284)
 
 [node name="BottomTrigger" type="Area2D" parent="." index="3" unique_id=281714878]
 position = Vector2(576, 648)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/10_Statue.tscn"
+spawn_marker = "BottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger" index="0" unique_id=1416835419]
-position = Vector2(0, 0.5)
+position = Vector2(14.5, 190.5)
 shape = SubResource("ShapeRightStatueTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="BottomTrigger" index="1" unique_id=1332851363]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomTrigger/ShowNextAreaName" index="0" unique_id=191624610]
+position = Vector2(-17.5, 160.625)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="BottomTrigger" index="2" unique_id=417076906]
+position = Vector2(0, 127)
 
 [node name="RightBottomTrigger" type="Area2D" parent="." index="4" unique_id=426353363]
 position = Vector2(1152, 400)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/11_PondBench.tscn"
+spawn_marker = "LeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBottomTrigger" index="0" unique_id=1391930058]
-position = Vector2(-7.5, 112.5)
+position = Vector2(24, 244.5)
 shape = SubResource("ShapeLeftPondTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightBottomTrigger" index="1" unique_id=280211201]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightBottomTrigger/ShowNextAreaName" index="0" unique_id=1156465360]
+position = Vector2(-3.5, 240.5)
+shape = SubResource("ShowNextAreaNameShape2")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightBottomTrigger" index="2" unique_id=1502303486]
+position = Vector2(-98, 241)
+
+[node name="MinigameTrigger" type="Area2D" parent="." index="5" unique_id=1119838686]
+position = Vector2(0, 324)
+script = ExtResource("7_mingame")
+target_scene = "res://Scenes/Minigames/SimonMemorygame/Root.tscn"
+trigger_name = "MinigameTrigger"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MinigameTrigger" index="0" unique_id=584121739]
+position = Vector2(8.5, 288)
+shape = SubResource("ShapeMinigameTrigger")
+
+[node name="Spawnpoint" type="Marker2D" parent="MinigameTrigger" index="1"]
+position = Vector2(150, 0)

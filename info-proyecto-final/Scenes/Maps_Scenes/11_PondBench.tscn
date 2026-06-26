@@ -1,15 +1,22 @@
 [gd_scene format=4 uid="uid://taik7bfqpycs"]
 
 [ext_resource type="PackedScene" uid="uid://cbyf7348b2rkf" path="res://Scenes/Maps_Scenes/_baseScene.tscn" id="1_ceya6"]
-[ext_resource type="Texture2D" uid="uid://ccykgjnuybbxq" path="res://Assets/Maps/Download/11_PondBench.png" id="2_4wtbg"]
+[ext_resource type="Texture2D" uid="uid://ccykgjnuybbxq" path="res://Assets/Maps/11_PondBench.png" id="2_4wtbg"]
 [ext_resource type="PackedScene" uid="uid://bdhx0qac0eqr5" path="res://Scenes/Player/player.tscn" id="3_plyr"]
 [ext_resource type="Script" uid="uid://bmp2rfchlc7bp" path="res://Scripts/Maps_Scripts/transition_trigger.gd" id="4_trig"]
+[ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeRightBridgeTrigger"]
-size = Vector2(4, 120)
+size = Vector2(8, 299)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape0"]
+size = Vector2(114, 355.25)
 
 [sub_resource type="RectangleShape2D" id="ShapeBottomMusicTrigger"]
-size = Vector2(7, 168)
+size = Vector2(8, 300)
+
+[sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape1"]
+size = Vector2(126, 300.25)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_ceya6")]
 receiver_id = "11"
@@ -28,16 +35,38 @@ position = Vector2(397.00006, 521)
 position = Vector2(0, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/9_BridgeBottom.tscn"
+spawn_marker = "RightBottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=457052929]
-position = Vector2(2, 256)
+position = Vector2(4, 369.5)
 shape = SubResource("ShapeRightBridgeTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="LeftTrigger" index="1" unique_id=404912575]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger/ShowNextAreaName" index="0" unique_id=1452792514]
+position = Vector2(58, 342.375)
+shape = SubResource("ShowNextAreaNameShape0")
+
+[node name="Spawnpoint" type="Marker2D" parent="LeftTrigger" index="2" unique_id=1733007435]
+position = Vector2(121, 349)
 
 [node name="RightTrigger" type="Area2D" parent="." index="3" unique_id=1440491296]
 position = Vector2(1152, 324)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/13_MusicMan.tscn"
+spawn_marker = "BottomTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1322891733]
-position = Vector2(-3.5, 232)
+position = Vector2(25, 370)
 shape = SubResource("ShapeBottomMusicTrigger")
+
+[node name="ShowNextAreaName" type="Area2D" parent="RightTrigger" index="1" unique_id=984056082]
+script = ExtResource("6_snan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger/ShowNextAreaName" index="0" unique_id=1124389772]
+position = Vector2(-32, 370.875)
+shape = SubResource("ShowNextAreaNameShape1")
+
+[node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=1267267934]
+position = Vector2(-97, 374)

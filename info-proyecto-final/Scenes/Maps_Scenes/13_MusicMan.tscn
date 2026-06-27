@@ -60,7 +60,7 @@ position = Vector2(511.5, 246)
 shape = SubResource("ShowNextAreaNameShape0")
 
 [node name="Spawnpoint" type="Marker2D" parent="TopTrigger" index="2" unique_id=2144476042]
-position = Vector2(309, 326)
+position = Vector2(321, 304)
 
 [node name="BottomTrigger" type="Area2D" parent="." index="3" unique_id=1491568390]
 position = Vector2(576, 648)
@@ -83,24 +83,25 @@ shape = SubResource("ShowNextAreaNameShape1")
 position = Vector2(0, 104)
 
 [node name="RightTrigger" type="Area2D" parent="." index="4" unique_id=2064951427]
-position = Vector2(1152, 324)
+position = Vector2(959, 336)
 script = ExtResource("4_trig")
 target_scene = "res://Scenes/Maps_Scenes/14_IceCreamVendor.tscn"
 spawn_marker = "BottomLeftTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger" index="0" unique_id=1305083598]
-position = Vector2(18.5, 133.5)
+position = Vector2(212, 117)
 shape = SubResource("ShapeRightPondTrigger")
 
 [node name="ShowNextAreaName" type="Area2D" parent="RightTrigger" index="1" unique_id=1736692451]
+position = Vector2(-23, 71)
 script = ExtResource("6_snan")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightTrigger/ShowNextAreaName" index="0" unique_id=942104128]
-position = Vector2(-24, 134.5)
+position = Vector2(192, 80)
 shape = SubResource("ShowNextAreaNameShape2")
 
 [node name="Spawnpoint" type="Marker2D" parent="RightTrigger" index="2" unique_id=615954597]
-position = Vector2(-184, 129)
+position = Vector2(-29, 143)
 
 [node name="MinigameTrigger" parent="." index="6" unique_id=505678442 instance=ExtResource("6_upv0o")]
 position = Vector2(465, 444)

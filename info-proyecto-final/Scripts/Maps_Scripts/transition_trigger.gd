@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 
 func _get_destination_text() -> String:
 	var names = {
+		"0_Room": "The End",
 		"1_Entrance": "Entrada",
 		"3_OneLampTwoBenches": "Banco con Lampara",
 		"4_Bust": "Busto",

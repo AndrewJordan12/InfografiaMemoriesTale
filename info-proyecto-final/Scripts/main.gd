@@ -27,6 +27,8 @@ var player : player_state = player_state.WALKING
 enum fluteState {PLAYING, PREVIEW, IDLE, WIN}
 var flute_current_state : fluteState = fluteState.IDLE
 
+var won_status :bool =false
+
 func _ready():
 	generate_puzzle()
 	init_ui()
@@ -101,10 +103,11 @@ func hide_keypad():
 #endregion
 
 func on_failed():
-	print("Failed")
-	
+	won_status = false
+	get_tree().change_scene_to_file("res://Scenes/Maps_Scenes/win_screen.tscn")
 func on_won():
-	print("WON")
+	won_status = true
+	get_tree().change_scene_to_file("res://Scenes/Maps_Scenes/win_screen.tscn")
 
 func player_change(new_state:player_state):
 	player = new_state

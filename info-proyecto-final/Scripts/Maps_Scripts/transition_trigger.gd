@@ -2,6 +2,7 @@ extends Area2D
 
 @export var target_scene: String = ""
 @export var spawn_marker: String = ""
+@onready var labelMap : Label = get_parent().get_node("MapMention")
 
 var _player: CharacterBody2D
 var _triggered: bool = false
@@ -9,7 +10,8 @@ var _bubble_timer: float = 0.0
 var _waiting: bool = false
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
 
 func _exit_tree() -> void:
 	_player = null
@@ -23,6 +25,7 @@ func _process(delta: float) -> void:
 
 func _get_destination_text() -> String:
 	var names = {
+		"0_Room": "The End",
 		"1_Entrance": "Entrada",
 		"3_OneLampTwoBenches": "Banco con Lampara",
 		"4_Bust": "Busto",
@@ -41,6 +44,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and not _triggered:
 		_player = body
 		_player.bubble_text = _get_destination_text()
+		labelMap.visible = true
+		labelMap.text = _get_destination_text()
 		_triggered = true
 		_waiting = true
 		_bubble_timer = 0.8

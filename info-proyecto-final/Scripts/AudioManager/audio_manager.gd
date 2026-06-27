@@ -2,6 +2,7 @@ extends Node
 
 @onready var flute_minigame = $FluteMinigame
 @onready var soundtrack = $Soundtrack
+@onready var bgsoundtrack = $Soundtrack/AudioStreamPlayer
 
 var fluteminigame_players: Dictionary = {}
 var soundtrack_players: Dictionary = {}
@@ -12,6 +13,12 @@ func _ready() -> void:
 
 	for child in flute_minigame.get_children():
 		fluteminigame_players[child.name] = child
+	bgsoundtrack.finished.connect(play_bg)
+	bgsoundtrack.play()
+
+func play_bg():
+	if not bgsoundtrack.playing:
+		bgsoundtrack.play()
 
 func play_soundtrack(sound_name: String):
 	if soundtrack_players.has(sound_name):

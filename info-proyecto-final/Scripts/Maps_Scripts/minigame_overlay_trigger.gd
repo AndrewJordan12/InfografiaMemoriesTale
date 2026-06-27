@@ -11,6 +11,7 @@ func _on_body_exited(body: Node2D) -> void:
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
+		body.get_node("AnimatedSprite2D").play("idle_front")
 		show_overlay()
 
 func show_overlay():
@@ -19,6 +20,7 @@ func show_overlay():
 	else:
 		get_parent().add_child(overlay_minigame)
 	State.player = State.player_state.STANDING
+	
 
 func hide_overlay():
 	print("Removing overla2y")

@@ -4,21 +4,12 @@ extends CharacterBody2D
 @export var acceleration: float = 10.0
 @export var friction: float = 15.0
 
+var maplabel: Label 
 var bubble_text: String = ""
-var _bubble_label: Label
 var last_direction: String = "front"
 
 func _ready() -> void:
 	add_to_group("player")
-	_bubble_label = Label.new()
-	_bubble_label.name = "BubbleLabel"
-	_bubble_label.position = Vector2(-120, -110)
-	_bubble_label.size = Vector2(240, 50)
-	_bubble_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_bubble_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_bubble_label.visible = false
-	_bubble_label.add_theme_font_size_override("font_size", 42)
-	add_child(_bubble_label)
 	load_scene_scaling_settings()
 
 @onready var parent_node = get_parent()
@@ -100,17 +91,13 @@ func move_character(delta:float) -> void:
 #endregion
 
 func _refresh_bubble() -> void:
-	if _bubble_label == null:
-		return
+	if maplabel == null:
+		maplabel = get_parent().get_node_or_null("MapMention")
 	if bubble_text == "":
-		_bubble_label.visible = false
+		if maplabel != null:
+			maplabel.visible = false
 		return
-	_bubble_label.text = bubble_text
-	_bubble_label.add_theme_color_override("font_color", Color.BLACK)
-	var bg = StyleBoxFlat.new()
-	bg.bg_color = Color.WHITE
-	bg.set_corner_radius_all(8)
-	bg.set_content_margin_all(6)
-	_bubble_label.add_theme_stylebox_override("normal", bg)
-	_bubble_label.visible = true
+	if maplabel != null:
+		maplabel.text = bubble_text
+		maplabel.visible = true
 	

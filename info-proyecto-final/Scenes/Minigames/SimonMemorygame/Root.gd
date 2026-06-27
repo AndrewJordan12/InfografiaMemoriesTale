@@ -1,6 +1,6 @@
 extends Control
 
-const MAX_LEVEL: int = 1
+const MAX_LEVEL: int = 2
 const FLASH_DURATION: float = 0.5
 const FLASH_GAP: float = 0.3
 const LOSSES_TO_SCREAMER: int = 3

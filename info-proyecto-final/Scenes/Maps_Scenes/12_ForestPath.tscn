@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://doaowylije87n" path="res://Scripts/Maps_Scripts/show_next_area_name.gd" id="6_snan"]
 
 [sub_resource type="RectangleShape2D" id="ShapeLeftStatueTrigger"]
-size = Vector2(589, 7)
+size = Vector2(108, 132)
 
 [sub_resource type="RectangleShape2D" id="ShowNextAreaNameShape"]
-size = Vector2(639, 53)
+size = Vector2(191, 179)
 
 [node name="MapTexture2" unique_id=518045972 instance=ExtResource("1_qugsi")]
 receiver_id = "12"
@@ -36,7 +36,7 @@ target_scene = "res://Scenes/Maps_Scenes/10_Statue.tscn"
 spawn_marker = "RightTrigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger" index="0" unique_id=2009766882]
-position = Vector2(294.5, 516.5)
+position = Vector2(54, 454)
 shape = SubResource("ShapeLeftStatueTrigger")
 
 [node name="ShowNextAreaName" type="Area2D" parent="LeftTrigger" index="1" unique_id=335738408]
@@ -44,6 +44,7 @@ position = Vector2(319.5, 493.5)
 script = ExtResource("6_snan")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTrigger/ShowNextAreaName" index="0" unique_id=142705092]
+position = Vector2(-224, -63)
 shape = SubResource("ShowNextAreaNameShape")
 
 [node name="Spawnpoint" type="Marker2D" parent="LeftTrigger" index="2" unique_id=1020958097]

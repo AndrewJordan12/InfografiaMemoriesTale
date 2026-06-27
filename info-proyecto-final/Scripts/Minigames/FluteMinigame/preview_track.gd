@@ -83,7 +83,7 @@ func show_beat_notes(beat: int):
 					note_node.show_note_animated()
 
 # Show all future notes at low opacity
-func show_future_notes(current_beat: int):
+func show_future_notes(p_current_beat: int):
 	# First hide all notes
 	grid.hide_all_notes()
 	
@@ -94,15 +94,15 @@ func show_future_notes(current_beat: int):
 		var should_be_full = false
 		
 		# Check if this beat has been shown (past beats)
-		if beat in shown_beats or beat < current_beat:
+		if beat in shown_beats or beat < p_current_beat:
 			should_be_full = true
 		
 		# Check if this is the current beat (being played now)
-		if beat == current_beat:
+		if beat == p_current_beat:
 			should_be_full = true
 		
 		for row_index in track[beat]:
-			var note_type = track[beat][row_index]
+			var _note_type = track[beat][row_index]
 			if beat < grid.columns:
 				var row = grid.rows.get_child(row_index)
 				if beat < row.get_child_count():
@@ -156,7 +156,7 @@ func show_all_track_notes():
 	
 	for beat in track:
 		for row_index in track[beat]:
-			var note_type = track[beat][row_index]
+			var _note_type = track[beat][row_index]
 			if beat < grid.columns:
 				var row = grid.rows.get_child(row_index)
 				if beat < row.get_child_count():

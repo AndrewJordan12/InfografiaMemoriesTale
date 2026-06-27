@@ -7,9 +7,9 @@ var track_name: String = ""
 var file_path = "res://Scripts/Minigames/FluteMinigame/Tracks/"
 
 # Load a track from a JSON file
-func load_track(track_name: String) -> bool:
+func load_track(p_track_name: String) -> bool:
 	file_path = "res://Scripts/Minigames/FluteMinigame/Tracks/"
-	file_path += track_name + ".json"
+	file_path += p_track_name + ".json"
 	
 	if not FileAccess.file_exists(file_path):
 		print("Track not found: ", file_path)
@@ -32,7 +32,7 @@ func load_track(track_name: String) -> bool:
 	# Convert JSON data to note_references format
 	json_to_dictionary(data)
 	
-	self.track_name = track_name
+	self.track_name = p_track_name
 	print("Track loaded: ", track_name)
 	return true
 
